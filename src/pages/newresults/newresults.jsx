@@ -2,13 +2,13 @@
 import "./newresults.scss";
 
 // Import components
-
+import Sidebar from "../../components/sidebar/sidebar";
 
 // Main
 const Newresults = () => {
     return (
         <div className="new">
-
+            <Sidebar />
             <div className="newContainer">
                 <div className="top">
                     <h1>Title</h1>
