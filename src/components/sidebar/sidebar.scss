@@ -33,7 +33,7 @@
         li {
           display: flex;
           align-items: center;
-          padding: 5px;
+          padding: 10px;
           cursor: pointer;
   
           &:hover {
@@ -46,7 +46,7 @@
           }
   
           span{
-              font-size: 13px;
+              font-size: 16px;
               font-weight: 600;
               color: #888;
               margin-left: 10px;
@@ -73,9 +73,6 @@
             }
             &:nth-child(2){
                 background-color: #000;
-            }
-            &:nth-child(3){
-                background-color: darkblue;
             }
         }
     }
