@@ -11,10 +11,15 @@
         }
 
         .homeTitle,
-        .charts {
+        .homeContent {
             display: flex;
             padding: 20px;
             gap: 20px;
+        }
+
+        .homeContent {
+            margin-top: 0px;
+            padding: 5px 20px;
         }
     }
 }
