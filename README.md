@@ -11,7 +11,6 @@ The objective of this project is to develop an app for tracking LDL, HDL, and tr
 * Firebase
 * Recharts
 * SASS
-* Emotion
 * Material UI
 
 ## User Stories
