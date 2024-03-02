@@ -9,23 +9,23 @@ const Target = () => {
             <div className="top">
                 <h1 className="title">Target</h1>
             </div>
-            <hr />
+            <hr/>
             <div className="bottom">
-                <p>Cholesterol</p>
+                <p><b>Cholesterol Target:</b> Number</p>
                 <div className="progressbar">
-                    <div className="progress" style={{width: "78%"}}>80%</div>
+                    <div className="progress" style={{width: "78%"}}>160 | 80%</div>
                 </div>
-                <p>HDL-Cholesterol</p>
+                <p><b>HDL-Cholesterol Target:</b> Number</p>
                 <div className="progressbar">
-                    <div className="progress" style={{width: "90%"}}>90%</div>
+                    <div className="progress" style={{width: "90%"}}>160 | 90%</div>
                 </div>
-                <p>LDL-Cholesterol</p>
+                <p><b>LDL-Cholesterol Target:</b> Number</p>
                 <div className="progressbar">
-                    <div className="progress" style={{width: "65%"}}>65%</div>
+                    <div className="progress" style={{width: "65%"}}>160 | 65%</div>
                 </div>
-                <p>Triglyceride</p>
+                <p><b>Triglyceride Target:</b> Number</p>
                 <div className="progressbar">
-                    <div className="progress" style={{width: "78%"}}>78%</div>
+                    <div className="progress" style={{width: "78%"}}>160 | 78%</div>
                 </div>
             </div>
         </div>
