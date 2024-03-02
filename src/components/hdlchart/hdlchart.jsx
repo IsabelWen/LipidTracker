@@ -36,7 +36,7 @@ const HDLChart = () => {
                 <h1 className="title">HDL Bar Chart</h1>
             </div>
             <hr />
-            <ResponsiveContainer width="100%" aspect={2 / 1}>
+            <ResponsiveContainer width="100%" aspect={2.5 / 1}>
                 <BarChart
                     width={500}
                     height={300}
@@ -55,7 +55,7 @@ const HDLChart = () => {
                     <Legend />
                         <Bar dataKey="hdl" 
                         fill="#82C272" 
-                        barSize={80}
+                        barSize={70}
                         activeBar={<Rectangle fill="#689b5b" />}
                          />     
                 </BarChart>
