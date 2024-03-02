@@ -50,7 +50,7 @@ const HDLChart = () => {
                 >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="date" />
-                    <YAxis />
+                    <YAxis type="number" domain={[0, 80]}/>
                     <Tooltip />
                     <Legend />
                         <Bar dataKey="hdl" 

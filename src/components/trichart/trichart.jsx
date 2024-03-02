@@ -28,7 +28,7 @@ const TriChart = () => {
     return (
         <div className="chart">
             <div className="top">
-                <h1 className="title">Triglyceride Line Chart</h1>
+                <h1 className="title">Triglycerides Line Chart</h1>
             </div>
             <hr />
             <ResponsiveContainer width="100%" aspect={4 / 1}>
@@ -49,7 +49,7 @@ const TriChart = () => {
                     <Tooltip />
                     <Legend />
                     <Line type="monotone"
-                    name="Triglyceride"
+                    name="Triglycerides"
                     connectNulls
                     dataKey="triglycerides"
                     stroke="#D5255E"

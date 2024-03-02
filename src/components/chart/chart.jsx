@@ -62,6 +62,13 @@ const Chart = () => {
                         stroke="#077368"
                         strokeWidth="2"
                         activeDot={{ r: 8 }} />
+                        <Line type="monotone"
+                        name="HDL-Cholesterol"
+                        connectNulls
+                        dataKey="hdl"
+                        stroke="#4A5596"
+                        strokeWidth="2"
+                        activeDot={{ r: 8 }} />
                     </LineChart>
                 </ResponsiveContainer>
         </div>
