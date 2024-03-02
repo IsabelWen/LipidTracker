@@ -28,7 +28,7 @@ const Chart = () => {
     return (
         <div className="chart">
             <div className="top">
-                <h1 className="title">Cholesterol and LDL-Cholesterol Line Chart</h1>
+                <h1 className="title">Cholesterol Line Chart</h1>
             </div>
             <hr />
             <ResponsiveContainer width="100%" aspect={4 / 1}>
