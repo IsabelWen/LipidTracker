@@ -46,8 +46,6 @@ const Target = () => {
         CholesterolWidth = CholesterolPercentage + "%";
     }
 
-
-
     // HDL width
     let HDLWidth = 0;
     if (latestData.hdl >= 45) {
@@ -82,21 +80,21 @@ const Target = () => {
             </div>
             <hr/>
             <div className="bottom">
-                <p><b>Cholesterol Target:</b> 190</p>
+                <p><b>Cholesterol</b>(mg/dL): Target 190 | Current {latestData.cholesterol}</p>
                 <div className="progressbar">
-                    <div className="progress" style={{width: CholesterolWidth}}>{latestData.cholesterol} mg/dL | {CholesterolWidth}</div>
+                    <div className="progress" style={{width: CholesterolWidth}}>{CholesterolWidth}</div>
                 </div>
-                <p><b>HDL-Cholesterol Target:</b> 45</p>
+                <p><b>HDL-Cholesterol</b>(mg/dL): Target 45 | Current {latestData.hdl}</p>
                 <div className="progressbar">
-                    <div className="progress" style={{width: HDLWidth}}>{latestData.hdl} mg/dL | {HDLWidth}</div>
+                    <div className="progress" style={{width: HDLWidth}}>{HDLWidth}</div>
                 </div>
-                <p><b>LDL-Cholesterol Target:</b> 116</p>
+                <p><b>LDL-Cholesterol</b>(mg/dL): Target 116 | Current {latestData.ldl}</p>
                 <div className="progressbar">
-                    <div className="progress" style={{width: LDLWidth}}>{latestData.ldl} mg/dL | {LDLWidth}</div>
+                    <div className="progress" style={{width: LDLWidth}}>{LDLWidth}</div>
                 </div>
-                <p><b>Triglycerides Target:</b> 150</p>
+                <p><b>Triglycerides</b>(mg/dL): Target 150 | Current {latestData.triglycerides}</p>
                 <div className="progressbar">
-                    <div className="progress" style={{width: TriglycerideWidth}}>{latestData.triglycerides} mg/dL | {TriglycerideWidth}</div>
+                    <div className="progress" style={{width: TriglycerideWidth}}>{TriglycerideWidth}</div>
                 </div>
             </div>
         </div>
