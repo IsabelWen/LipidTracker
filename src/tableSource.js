@@ -1,51 +1,47 @@
 export const resultsColumns = [
-    { field: "id", headerName: "ID", width: 70 },
     {
       field: "date",
       headerName: "Date",
-      width: 160,
+      width: 120,
       renderCell: (params) => {
         const { date } = params.row;
-        if (date && date.seconds) {
-          const jsDate = new Date(date.seconds * 1000);
-          return (
-            <div className="cellWithImg">
-              {jsDate.toLocaleDateString()}
-            </div>
-          );
-        } else {
-          return (
-            <div className="cellWithImg">
-              {params.row.date}
-            </div>
-          );
+        const formatedDate = new Date(date).toLocaleDateString('en-GB');
+        return (
+          <div>
+            {formatedDate}
+          </div>
+        );
         }
       },
-    },
     {
       field: "cholesterol",
       headerName: "Cholesterol",
+      type: "number",
       width: 160,
     },
   
     {
       field: "hdl",
       headerName: "HDL-Cholesterol",
+      type: "number",
       width: 160,
     },
     {
       field: "ldl",
       headerName: "LDL-Cholesterol",
+      type: "number",
       width: 160,
     },
     {
       field: "triglycerides",
       headerName: "Triglycerides",
+      type: "number",
       width: 160,
     },
     {
       field: "note",
       headerName: "Note",
-      width: 200,
+      width: 300,
+      sortable: false,
     },
   ];
