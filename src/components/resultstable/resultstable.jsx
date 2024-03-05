@@ -1,6 +1,6 @@
 import "./resultstable.scss";
 import { resultsColumns } from "../../tableSource";
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
@@ -35,14 +35,15 @@ const Resultstable = () => {
     }
   };
 
-  const actionColumn = [
+  const deleteColumn = [
     {
-      field: "action",
-      headerName: "Action",
+      field: "delete",
+      headerName: "Delete Test Result",
       width: 200,
+      sortable: false,
       renderCell: (params) => {
         return (
-          <div className="cellAction">
+          <div className="cellDelete">
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
@@ -66,9 +67,14 @@ const Resultstable = () => {
         <DataGrid
             className="datagrid"
             rows={data}
-            columns={resultsColumns.concat(actionColumn)}
-            pageSize={9}
-            rowsPerPageOptions={[9]}
+            columns={resultsColumns.concat(deleteColumn)}
+            pageSize={10}
+            disableColumnMenu 
+            initialState={{
+                sorting: {
+                    sortModel: [{ field: 'date', sort: 'desc' }],
+                },
+            }}
         />
     </div>
   );

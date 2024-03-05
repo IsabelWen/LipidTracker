@@ -14,35 +14,39 @@
   
       .link{
         text-decoration: none;
-        color: green;
+        color: #00796b;
         font-size: 16px;
         font-weight: 400;
-        border: 1px solid green;
+        border: 1px solid #00796b;
         padding: 5px;
         border-radius: 5px;
         cursor: pointer;
+        transition: background-color 0.4s ease-out;
+
+        &:hover{
+            background-color: #00796b;
+            color: #fff;
+        }
       }
     }
   
-    .cellAction {
+    .cellDelete {
       display: flex;
       align-items: center;
       gap: 15px;
-  
-      .viewButton {
-        padding: 2px 5px;
-        border-radius: 5px;
-        color: darkblue;
-        border: 1px dotted rgba(0, 0, 139, 0.596);
-        cursor: pointer;
-      }
       
       .deleteButton {
         padding: 2px 5px;
         border-radius: 5px;
-        color: crimson;
-        border: 1px dotted rgba(220, 20, 60, 0.6);
+        color: rgb(170, 12, 12);
+        border: 1px solid rgba(170, 12, 12, 0.8);
         cursor: pointer;
+        transition: background-color 0.4s ease-out;
+
+        &:hover {
+            background-color: rgb(170, 12, 12);
+            color: #fff;
+        }
       }
     }
   }

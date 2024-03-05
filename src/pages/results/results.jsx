@@ -3,6 +3,7 @@ import "./results.scss"
 
 // Import components
 import Sidebar from "../../components/sidebar/sidebar";
+import Resultstable from "../../components/resultstable/resultstable";
 
 // Main
 const Results = () => {
@@ -10,7 +11,7 @@ const Results = () => {
         <div className="results">
             <Sidebar />
             <div className="resultsContainer">
-                Results
+                <Resultstable />
             </div>
         </div>
     );
