@@ -21,7 +21,12 @@ const HDLChart = () => {
 
             // Sort the list array by date
             list.sort((a, b) => new Date(a.date) - new Date(b.date));
-            
+
+            // Convert date format to DD/MM/YYYY
+            list.forEach((item) => {
+                item.date = new Date(item.date).toLocaleDateString('en-GB');
+            });
+
             setData(list);
         }, (error) => {
             console.log(error);
