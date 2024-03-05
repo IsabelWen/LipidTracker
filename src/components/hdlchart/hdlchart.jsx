@@ -18,6 +18,10 @@ const HDLChart = () => {
                     list.push({ id: doc.id, ...doc.data() });
                 }
             });
+
+            // Sort the list array by date
+            list.sort((a, b) => new Date(a.date) - new Date(b.date));
+            
             setData(list);
         }, (error) => {
             console.log(error);
