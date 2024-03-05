@@ -8,8 +8,8 @@ const firebaseConfig = {
   authDomain: "lipidtracker.firebaseapp.com",
   projectId: "lipidtracker",
   storageBucket: "lipidtracker.appspot.com",
-  messagingSenderId: "525783394348",
-  appId: "1:525783394348:web:ee5d544809b9b31a7b8989"
+  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDERID,
+  appId: process.env.REACT_APP_FIREBASE_APPID
 };
 
 // Initialize Firebase and Cloud Firestore
