@@ -43,9 +43,9 @@ const TriChart = () => {
                         bottom: 5,
                     }}
                 >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
-                    <YAxis type="number" domain={[0, 1000]} />
+                    <CartesianGrid strokeDasharray="3 3" className="chartGrid" />
+                    <XAxis dataKey="date" stroke="gray" />
+                    <YAxis type="number" domain={[0, 1000]} stroke="gray" />
                     <Tooltip />
                     <Legend />
                     <Line type="monotone"

@@ -48,9 +48,9 @@ const HDLChart = () => {
                         bottom: 5,
                     }}
                 >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
-                    <YAxis type="number" domain={[0, 80]}/>
+                    <CartesianGrid strokeDasharray="3 3" className="chartGrid" />
+                    <XAxis dataKey="date" stroke="gray" />
+                    <YAxis type="number" domain={[0, 80]} stroke="gray" />
                     <Tooltip />
                     <Legend />
                         <Bar dataKey="hdl" 
