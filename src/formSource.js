@@ -1,9 +1,10 @@
 export const resultsInputs = [
     {
       id: "date",
-      date: "Date",
+      label: "Date",
       type: "date",
       placeholder: "Test Result Date",
+      required: true
     },
     {
       id: "cholesterol",
@@ -18,7 +19,7 @@ export const resultsInputs = [
       type: "number",
       step: "0.1",
       max: 120,
-      placeholder: "HDL-Cholesterol",
+      placeholder: "HDL-Cholesterol (example: 39.3)",
     },
     {
       id: "ldl",

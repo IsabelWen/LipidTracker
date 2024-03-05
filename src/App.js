@@ -7,6 +7,7 @@ import FAQ from "./pages/faq/faq";
 import Settings from "./pages/settings/settings";
 import Notes from "./pages/notes/notes";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { resultsInputs } from "./formSource";
 
 // Main
 function App() {
@@ -19,7 +20,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="results">
               <Route index element={<Results />} />
-              <Route path="newresults" element={<Newresults title="Add New Test Result" />} />
+              <Route path="newresults" element={<Newresults inputs={resultsInputs} title="Add New Test Result" />} />
             </Route>
             <Route path="notes">
               <Route index element={<Notes />} />
