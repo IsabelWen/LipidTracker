@@ -63,10 +63,17 @@ const HDLChart = () => {
                     <Tooltip />
                     <Legend />
                         <Bar dataKey="hdl" 
+                        name="HDL"
                         fill="#82C272" 
                         barSize={70}
                         activeBar={<Rectangle fill="#689b5b" />}
-                         />     
+                         />  
+                        <Bar dataKey="note"
+                        name="Note"
+                        fill="gray"
+                        barSize={0}
+                        legendType="none"
+                        />   
                 </BarChart>
             </ResponsiveContainer>
         </div>

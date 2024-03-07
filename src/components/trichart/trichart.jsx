@@ -64,6 +64,12 @@ const TriChart = () => {
                     stroke="#D5255E"
                     strokeWidth="2"
                     activeDot={{ r: 8 }} />
+                    <Line
+                    name="Note" 
+                    dataKey="note"
+                    stroke="gray"
+                    legendType="none"
+                    />
                 </LineChart>
             </ResponsiveContainer>
         </div>

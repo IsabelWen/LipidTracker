@@ -78,6 +78,12 @@ const Chart = () => {
                         stroke="#4A5596"
                         strokeWidth="2"
                         activeDot={{ r: 8 }} />
+                        <Line
+                        name="Note" 
+                        dataKey="note"
+                        stroke="gray"
+                        legendType="none"
+                        />
                     </LineChart>
                 </ResponsiveContainer>
         </div>
