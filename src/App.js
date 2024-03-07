@@ -1,4 +1,4 @@
-// Imports
+// Import pages
 import Home from "./pages/home/home";
 import Login from "./pages/login/login";
 import Newresults from "./pages/newresults/newresults";
@@ -6,13 +6,19 @@ import Results from "./pages/results/results";
 import FAQ from "./pages/faq/faq";
 import Settings from "./pages/settings/settings";
 import Notes from "./pages/notes/notes";
+
+// Imports
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { resultsInputs } from "./formSource";
+import "./style/dark.scss";
+import { useContext } from "react";
+import { DarkModeContext } from "./context/darkModeContext";
 
 // Main
 function App() {
+  const { darkMode } = useContext(DarkModeContext);
   return (
-    <div className="App">
+    <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
