@@ -16,7 +16,7 @@ const Questions = () => {
                 FAQ
             </div>
             <div className="accordionContainer">
-                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} className="accordion">
                     <AccordionSummary
                     className="accordionTitle"
                     expandIcon={<ExpandMore />}
@@ -42,7 +42,7 @@ const Questions = () => {
                         cholesterol values, you can still save this test result.
                     </AccordionDetails>
                 </Accordion>
-                <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+                <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')} className="accordion">
                     <AccordionSummary
                     className="accordionTitle"
                     expandIcon={<ExpandMore />}
@@ -64,7 +64,7 @@ const Questions = () => {
                         gender, the HDL target value will be set to the middle value between the targets for women and men.
                     </AccordionDetails>
                 </Accordion>
-                <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+                <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')} className="accordion">
                     <AccordionSummary
                     className="accordionTitle"
                     expandIcon={<ExpandMore />}
@@ -102,7 +102,7 @@ const Questions = () => {
                         tailored recommendations to help you manage your cholesterol levels and reduce your risk of cardiovascular disease.
                     </AccordionDetails>
                 </Accordion>
-                <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+                <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')} className="accordion">
                     <AccordionSummary
                     className="accordionTitle"
                     expandIcon={<ExpandMore />}

@@ -1,7 +1,7 @@
 .app.dark {
     background-color: #111;
     color: rgb(177, 177, 177);
-
+    
     .homeTitle {
         color: #00ffe1;
 
@@ -140,6 +140,21 @@
                 }
             }
 
+        }
+    }
+
+    .accordion {
+        background-color: transparent;
+        color: rgb(177, 177, 177);
+
+        .accordionTitle {
+            .MuiSvgIcon-root {
+                color: rgb(177, 177, 177);
+            }
+        }
+
+        &::before {
+            background-color: rgb(177, 177, 177, 0.4);
         }
     }
 }
