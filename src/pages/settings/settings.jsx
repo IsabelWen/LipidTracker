@@ -3,6 +3,7 @@ import "./settings.scss"
 
 // Import components
 import Sidebar from "../../components/sidebar/sidebar";
+import Setting from "../../components/setting/setting";
 
 // Main
 const Settings = () => {
@@ -10,7 +11,7 @@ const Settings = () => {
         <div className="settings">
             <Sidebar />
             <div className="settingsContainer">
-                Setting
+                <Setting/>
             </div>
         </div>
     );

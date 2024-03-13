@@ -1,0 +1,24 @@
+.setting {
+    height: 600px;
+    padding: 20px;
+
+    .title {
+        width: 100%;
+        font-size: 24px;
+        color: #00796b;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    .css-18st3fs-MuiButtonBase-root-MuiButton-root {
+        color: #00796b;
+    }
+    
+    .css-1f5ro5o-MuiButtonBase-root-MuiButton-root {
+        background-color: #00796b;
+
+        &:hover {
+            background-color: #00796b;
+        }
+    }
+}
