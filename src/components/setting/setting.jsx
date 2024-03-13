@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import Genderradio from "../genderradio/genderradio";
 import Riskselect from "../riskselect/riskselect";
 
-// Mock Steps
+// Steps
 const steps = [
     {
         label: 'Select a gender',
