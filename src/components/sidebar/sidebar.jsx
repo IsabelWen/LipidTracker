@@ -1,6 +1,9 @@
 // Imports
 import "./sidebar.scss"
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/authContext";
+import { getAuth, signOut } from "firebase/auth";
 
 // Import Icons
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -12,6 +15,21 @@ import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
 
 // Main
 const Sidebar = () => {
+    const navigate = useNavigate();
+    const { dispatch } = useContext(AuthContext);
+    const auth = getAuth();
+  
+    const handleLogout = () => {
+        signOut(auth)
+        .then(() => {
+            dispatch({ type: "LOGOUT" });
+            navigate("/login");
+        })
+        .catch((error) => {
+            console.error("Logout error:", error);
+        });
+    };
+
     return (
         <div className="sidebar">
             <div className="top">
@@ -58,7 +76,7 @@ const Sidebar = () => {
                         </li>
                     </Link>
                     {/* Logout */}
-                    <Link to="/" style={{ textDecoration: "none" }}>
+                    <Link onClick={handleLogout} style={{ textDecoration: "none" }}>
                         <li>
                             <ExitToAppIcon className="icon" />
                             <span>Logout</span>

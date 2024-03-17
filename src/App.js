@@ -8,17 +8,28 @@ import Settings from "./pages/settings/settings";
 import Notes from "./pages/notes/notes";
 
 // Imports
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { resultsInputs } from "./formSource";
+import { useContext } from "react";
+import { AuthContext } from "./context/authContext";
 
 // Main
 function App() {
+  const {currentUser} = useContext(AuthContext)
+  
+  const RequireAuth = ({children}) => {
+    return currentUser ? (children) : <Navigate to="/login" />;
+  };
+
+  console.log(currentUser);
+
   return (
     <div className="app">
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route index element={<Home />} />
+            <Route path="login" element={<Login />} />
+            <Route index element={<RequireAuth><Home /></RequireAuth>} />
             <Route path="login" element={<Login />} />
             <Route path="results">
               <Route index element={<Results />} />
