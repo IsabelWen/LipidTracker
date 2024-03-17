@@ -7,7 +7,7 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 
 // Imports
 import { useContext, useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
@@ -35,7 +35,20 @@ const Login = () => {
             })
             .catch((error) => {
                 setError(true)
-                console.error("Logout error:", error);
+                console.error("Login error:", error);
+        });
+    }
+
+    const handleSignup = (e) => {
+        e.preventDefault();
+
+        createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+            window.location.reload();
+        })
+        .catch((error) => {
+            setError(true)
+            console.error("Sign up error:", error);
         });
     }
 
@@ -61,7 +74,7 @@ const Login = () => {
                     </form>
                 </TabPanel>
                 <TabPanel value="2">
-                    <form onSubmit={handleLogin}>
+                    <form onSubmit={handleSignup}>
                         <input type="email" placeholder="Email" onChange={e=>setEmail(e.target.value)}/>
                         <input type="password" placeholder="Password" onChange={e=>setPassword(e.target.value)}/>
                         <button type="submit">Sign up</button>
