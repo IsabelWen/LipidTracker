@@ -8,13 +8,15 @@ import Sidebar from "../../components/sidebar/sidebar";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db, auth } from "../../firebase";
 
 // Main
 const Newresults = ({ inputs }) => {
     const [data, setData] = useState("");
     const navigate = useNavigate();
-
+    const user = auth.currentUser;
+    const userUID = user ? user.uid : null; 
+    
     const handleInput = (e) => {
         const id = e.target.id;
         const value = e.target.value;
@@ -31,6 +33,9 @@ const Newresults = ({ inputs }) => {
                 formData[key] = data[key];
             }
         }
+
+        // Add userUID to formData
+        formData.userID = userUID;
 
         try{
             await addDoc(collection(db, "results"), formData);
@@ -57,7 +62,7 @@ const Newresults = ({ inputs }) => {
                                     type={input.type} 
                                     placeholder={input.placeholder} 
                                     max={input.max}
-                                    maxlength={input.maxlength}
+                                    maxLength={input.maxLength}
                                     step={input.step}
                                     required={input.required}
                                     onChange={handleInput}/>

@@ -39,7 +39,7 @@ export const resultsInputs = [
       id: "note",
       label: "Note",
       type: "text",
-      maxlength: 100,
+      maxLength: 100,
       placeholder: "Type in additional information, such as changes in medication or dietery."
     },
   ];

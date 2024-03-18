@@ -8,7 +8,8 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 // Imports
 import { useContext, useState } from "react";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import { db, auth } from "../../firebase";
+import { setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 
@@ -43,8 +44,20 @@ const Login = () => {
         e.preventDefault();
 
         createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-            window.location.reload();
+        .then((userCredential) => {
+            const user = userCredential.user;
+            
+            setDoc(doc(db, "users", user.uid), {
+                email: user.email,
+                createdAt: new Date()
+            })
+            .then(() => {
+                window.location.reload();
+            })
+            .catch((error) => {
+                setError(true)
+                console.error("Error adding user to Firestore:", error)
+            });
         })
         .catch((error) => {
             setError(true)

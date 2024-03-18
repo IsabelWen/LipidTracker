@@ -1,15 +1,18 @@
 // Imports
 import "./target.scss"
-import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "../../firebase"
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { db, auth } from "../../firebase"
 import { useEffect, useState } from "react";
 
 // Main
 const Target = () => {
     const [latestData, setLatestData] = useState({});
+    const user = auth.currentUser;
+    const userUID = user.uid;
 
     useEffect(() => {
-        const unsub = onSnapshot(collection(db, "results"), (snapShot) => {
+        const unsub = onSnapshot(
+            query(collection(db, "results"), where("userID", "==", userUID)), (snapShot) => {
             let sortedData = snapShot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             // Filter out documents without a date
             sortedData = sortedData.filter(doc => doc.date);

@@ -3,14 +3,18 @@ import { resultsColumns } from "../../tableSource";
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { collection, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../firebase"
+import { auth } from "../../firebase";
 
 const Resultstable = () => {
   const [data, setData] = useState([]);
+  const user = auth.currentUser;
+  const userUID = user.uid;
 
   useEffect(() => {
-    const unsub = onSnapshot(collection(db, "results"), (snapShot) => {
+    const unsub = onSnapshot(
+      query(collection(db, "results"), where("userID", "==", userUID)), (snapShot) => {
       let list = [];
       snapShot.docs.forEach((doc) => {
         list.push({ id: doc.id, ...doc.data() });
@@ -24,7 +28,7 @@ const Resultstable = () => {
     return () => {
       unsub();
     };
-  }, []);
+  }, [userUID]);
 
   const handleDelete = async (id) => {
     try{

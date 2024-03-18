@@ -1,16 +1,19 @@
 // Imports
 import "./hdlchart.scss"
 import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "../../firebase"
+import { collection, onSnapshot, where, query } from "firebase/firestore";
+import { db, auth } from "../../firebase"
 import { useEffect, useState } from "react";
 
 // Main
 const HDLChart = () => {
     const [data, setData] = useState([]);
+    const user = auth.currentUser;
+    const userUID = user.uid;
 
     useEffect(() => {
-        const unsub = onSnapshot(collection(db, "results"), (snapShot) => {
+        const unsub = onSnapshot(
+            query(collection(db, "results"), where("userID", "==", userUID)), (snapShot) => {
             let list = [];
             snapShot.docs.forEach((doc) => {
                 const { hdl } = doc.data();
