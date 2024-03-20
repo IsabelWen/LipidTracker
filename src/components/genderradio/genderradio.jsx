@@ -5,33 +5,29 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "../../firebase"
-import { useEffect, useState } from "react";
+import { collection, updateDoc, doc } from "firebase/firestore";
+import { db, auth } from "../../firebase"
+import { useState } from "react";
 
 // Main
 const Genderradio = () => {
-    const [data, setData] = useState([]);
-    
-    // Database access / dont need access, just need to push the choice "female/male/other" to setting component
-    useEffect(() => {
-        const unsub = onSnapshot(collection(db, "targets"), (snapShot) => {
-          let list = [];
-          snapShot.docs.forEach((doc) => {
-            list.push({ id: doc.id, ...doc.data() });
-          });
-          setData(list);
-          }, (error) => {
-            console.log(error);
-          }
-        );
-    
-        return () => {
-          unsub();
-        };
-      }, []);
+    const [data, setData] = useState('none');
+    const user = auth.currentUser;
+    const userUID = user ? user.uid : null; 
 
-    
+    const usersCol = collection(db, "users");
+    const userDoc = doc(usersCol, userUID);
+
+    const handleInput = (event) => {
+        setData(event.target.value);
+        updateDoc(userDoc, {
+          gender: event.target.value,
+        }).then(() => {
+          console.log("Document successfully updated!");
+        }).catch((error) => {
+          console.error("Error updating document: ", error);
+        });
+    };
 
     return (
         <FormControl>
@@ -40,6 +36,7 @@ const Genderradio = () => {
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="female"
                 name="radio-buttons-group"
+                onChange={handleInput}
             >
                 <FormControlLabel value="female" control={<Radio />} label="Female" />
                 <FormControlLabel value="male" control={<Radio />} label="Male" />
