@@ -15,10 +15,9 @@ const Genderradio = () => {
     const user = auth.currentUser;
     const userUID = user ? user.uid : null; 
 
-    const usersCol = collection(db, "users");
-    const userDoc = doc(usersCol, userUID);
-
     const handleInput = (event) => {
+        const usersCol = collection(db, "users");
+        const userDoc = doc(usersCol, userUID);
         setData(event.target.value);
         updateDoc(userDoc, {
           gender: event.target.value,
