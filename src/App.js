@@ -5,7 +5,6 @@ import Newresults from "./pages/newresults/newresults";
 import Results from "./pages/results/results";
 import FAQ from "./pages/faq/faq";
 import Settings from "./pages/settings/settings";
-import Notes from "./pages/notes/notes";
 
 // Imports
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
@@ -34,9 +33,6 @@ function App() {
             <Route path="results">
               <Route index element={<Results />} />
               <Route path="newresults" element={<Newresults inputs={resultsInputs} title="Add New Test Result" />} />
-            </Route>
-            <Route path="notes">
-              <Route index element={<Notes />} />
             </Route>
             <Route path="faq">
               <Route index element={<FAQ />} />

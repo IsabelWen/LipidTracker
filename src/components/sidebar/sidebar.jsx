@@ -7,7 +7,6 @@ import { getAuth, signOut } from "firebase/auth";
 
 // Import Icons
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import StickyNote2Outlined from "@mui/icons-material/StickyNote2Outlined"
 import BiotechOutlinedIcon from '@mui/icons-material/BiotechOutlined';
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -52,13 +51,6 @@ const Sidebar = () => {
                         <li>
                             <BiotechOutlinedIcon className="icon" />
                             <span>Test Results</span>
-                        </li>
-                    </Link>
-                    {/* Notes */}
-                    <Link to="/notes" style={{ textDecoration: "none" }}>
-                        <li>
-                            <StickyNote2Outlined className="icon" />
-                            <span>Notes</span>
                         </li>
                     </Link>
                     {/* FAQ */}
