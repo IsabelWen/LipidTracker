@@ -36,6 +36,7 @@ const Genderradio = () => {
                 defaultValue="female"
                 name="radio-buttons-group"
                 onChange={handleInput}
+                value={data}
             >
                 <FormControlLabel value="female" control={<Radio />} label="Female" />
                 <FormControlLabel value="male" control={<Radio />} label="Male" />

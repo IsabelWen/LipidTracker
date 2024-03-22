@@ -65,6 +65,12 @@ const Setting = () => {
 
         // Get the user's gender and risk level
         const userSnapshot = await getDoc(userDoc); // Use getDoc() function instead of get()
+
+        if (!userSnapshot.exists()) {
+            console.log("User document not found.");
+            return;
+        }
+
         const userData = userSnapshot.data();
         const userGender = userData.gender;
         const userRiskLevel = userData.riskLevel;
