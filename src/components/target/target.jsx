@@ -1,6 +1,6 @@
 // Imports
 import "./target.scss"
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where, doc } from "firebase/firestore";
 import { db, auth } from "../../firebase"
 import { useEffect, useState } from "react";
 
@@ -11,6 +11,7 @@ const Target = () => {
     const user = auth.currentUser;
     const userUID = user.uid;
 
+    // Get the latest result Data
     useEffect(() => {
         const unsub = onSnapshot(
             query(collection(db, "results"), where("userID", "==", userUID)), (snapShot) => {
@@ -41,39 +42,59 @@ const Target = () => {
 
     console.log(latestData)
 
+    // Get the target field of user
+    useEffect(() => {
+        const userRef = collection(db, "users");
+        const userDoc = doc(userRef, userUID);
+        const unsub = onSnapshot(userDoc, (doc) => {
+            if (doc.exists()) {
+                setTargetData(doc.data().target);
+            }
+        }, (error) => {
+            console.log(error);
+        });
+    
+        return () => {
+            unsub();
+        };
+    }, []);
+
+    console.log('targetData: ', targetData);
+
+
     // Cholesterol Width
     let CholesterolWidth = 0;
-    if (latestData.cholesterol <= 190) {
+    if (latestData.cholesterol <= targetData.cholesterol) {
         CholesterolWidth = "100%";
     } else {
-        let CholesterolPercentage = parseInt((190*100)/(latestData.cholesterol));
+        let CholesterolPercentage = parseInt((targetData.cholesterol*100)/(latestData.cholesterol));
         CholesterolWidth = CholesterolPercentage + "%";
     }
 
     // HDL width
     let HDLWidth = 0;
-    if (latestData.hdl >= 45) {
+    if (latestData.hdl >= targetData.hdl) {
         HDLWidth = "100%"
     } else {
-        let HDLPercentage = parseInt((latestData.hdl*100)/45);
+        let HDLPercentage = parseInt((latestData.hdl*100)/targetData.hdl);
         HDLWidth = HDLPercentage + "%";
     }
 
     // LDL width
     let LDLWidth = latestData.ldl;
-    if (LDLWidth <= 116) {
+    if (LDLWidth <= targetData.ldl) {
         LDLWidth = "100%"
     } else {
-        let LDLPercentage = parseInt((116 * 100) / latestData.ldl);
+        let LDLPercentage = parseInt((targetData.ldl * 100) / latestData.ldl);
         LDLWidth = LDLPercentage + "%";
     }
 
     // LDL width
     let TriglycerideWidth = latestData.triglycerides;
-    if (TriglycerideWidth <= 150) {
+    if (TriglycerideWidth <= targetData.triglycerides) {
         TriglycerideWidth = "100%";
     } else {
-        let TriglyceridePercentage = parseInt((150 * 100) / latestData.triglycerides);
+        let TriglyceridePercentage = parseInt((targetData.triglycerides * 100) / latestData.triglycerides);
         TriglycerideWidth = TriglyceridePercentage + "%";
     }
 
@@ -84,19 +105,19 @@ const Target = () => {
             </div>
             <hr/>
             <div className="bottom">
-                <p><b>Cholesterol</b>(mg/dL): Target 190 | Current {latestData.cholesterol}</p>
+                <p><b>Cholesterol</b>(mg/dL): Target {targetData.cholesterol} | Current {latestData.cholesterol}</p>
                 <div className="progressbar">
                     <div className="progress" style={{width: CholesterolWidth}}>{CholesterolWidth}</div>
                 </div>
-                <p><b>HDL-Cholesterol</b>(mg/dL): Target 45 | Current {latestData.hdl}</p>
+                <p><b>HDL-Cholesterol</b>(mg/dL): Target {targetData.hdl} | Current {latestData.hdl}</p>
                 <div className="progressbar">
                     <div className="progress" style={{width: HDLWidth}}>{HDLWidth}</div>
                 </div>
-                <p><b>LDL-Cholesterol</b>(mg/dL): Target 116 | Current {latestData.ldl}</p>
+                <p><b>LDL-Cholesterol</b>(mg/dL): Target {targetData.ldl} | Current {latestData.ldl}</p>
                 <div className="progressbar">
                     <div className="progress" style={{width: LDLWidth}}>{LDLWidth}</div>
                 </div>
-                <p><b>Triglycerides</b>(mg/dL): Target 150 | Current {latestData.triglycerides}</p>
+                <p><b>Triglycerides</b>(mg/dL): Target {targetData.triglycerides} | Current {latestData.triglycerides}</p>
                 <div className="progressbar">
                     <div className="progress" style={{width: TriglycerideWidth}}>{TriglycerideWidth}</div>
                 </div>

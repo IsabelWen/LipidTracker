@@ -7,7 +7,6 @@ The objective of this project is to develop an app for tracking LDL, HDL, and tr
 * React
 * React DOM
 * React Router DOM
-* React Scripts
 * Firebase
 * Recharts
 * SASS
