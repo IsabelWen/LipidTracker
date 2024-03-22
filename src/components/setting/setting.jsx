@@ -6,9 +6,9 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
-import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "../../firebase"
-import { useEffect, useState } from "react";
+import { collection, onSnapshot, doc, updateDoc, where, getDoc, query, getDocs } from "firebase/firestore";
+import { db, auth } from "../../firebase"
+import { useState } from "react";
 
 // Import components
 import Genderradio from "../genderradio/genderradio";
@@ -37,11 +37,16 @@ const steps = [
 const Setting = () => {
     const [data, setData] = useState([]);
     const [activeStep, setActiveStep] = useState(0);
-
+    const user = auth.currentUser;
+    const userUID = user ? user.uid : null; 
 
     // Stepper
     const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        if (activeStep === steps.length -1) {
+            handleChange();
+        } else {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        }
     };
     
     const handleBack = () => {
@@ -51,36 +56,44 @@ const Setting = () => {
     const handleReset = () => {
         setActiveStep(0);
     };
-    
 
-    // Database access
-    useEffect(() => {
-        const unsub = onSnapshot(collection(db, "results"), (snapShot) => {
-            let list = [];
-            snapShot.docs.forEach((doc) => {
-                const { hdl } = doc.data();
-                if (hdl !== null && hdl !== undefined) {
-                    list.push({ id: doc.id, ...doc.data() });
-                }
+    // Set new riskLevelID
+    const handleChange = async (event) => {
+        const usersCol = collection(db, "users");
+        const userDoc = doc(usersCol, userUID);
+        const targetsCol = collection(db, "targets");
+
+        // Get the user's gender and risk level
+        const userSnapshot = await getDoc(userDoc); // Use getDoc() function instead of get()
+        const userData = userSnapshot.data();
+        const userGender = userData.gender;
+        const userRiskLevel = userData.riskLevel;
+
+        console.log('userData: ', userData)
+        // Query the targets collection to find the matching target document
+        const targetQuerySnapshot = await getDocs(
+            query(targetsCol, where("gender", "==", userGender), where("name", "==", userRiskLevel))
+        )
+
+        const targetData = targetQuerySnapshot.docs[0].data();
+        console.log('targetData: ', targetData)
+
+        // Check if any matching target document is found
+        if (!targetData.empty) {
+            // Update the user document with the riskLevelID from the target document
+            updateDoc(userDoc, {
+                target: targetData,
+            }).then(() => {
+                console.log("Document successfully updated!");
+            }).catch((error) => {
+                console.error("Error updating document: ", error);
             });
+        } else {
+        console.log("No matching target document found.");
+        }
 
-            // Sort the list array by date
-            list.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-            // Convert date format to DD/MM/YYYY
-            list.forEach((item) => {
-                item.date = new Date(item.date).toLocaleDateString('en-GB');
-            });
-
-            setData(list);
-        }, (error) => {
-            console.log(error);
-        });
-
-        return () => {
-            unsub();
-        };
-    }, []);
+        console.log('target: ', userData.target)
+    };
 
     
 
@@ -100,8 +113,8 @@ const Setting = () => {
                     <div>
                     <Button
                         variant="contained"
-                        onClick={handleNext}
                         sx={{ mt: 1, mr: 1 }}
+                        onClick={handleNext}
                     >
                         {index === steps.length - 1 ? 'Finish' : 'Continue'}
                     </Button>

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 // Main
 const Target = () => {
     const [latestData, setLatestData] = useState({});
+    const [targetData, setTargetData] = useState({});
     const user = auth.currentUser;
     const userUID = user.uid;
 
