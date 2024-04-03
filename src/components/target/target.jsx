@@ -62,6 +62,7 @@ const Target = () => {
         };
     }, []);
 
+    
     if (latestData.cholesterol == null) {
         latestData.cholesterol = 'No Data';
     }
@@ -74,6 +75,7 @@ const Target = () => {
     if (latestData.triglycerides == null) {
         latestData.triglycerides = 'No Data';
     }
+
     // Cholesterol Width
     let CholesterolWidth = 0;
     if (latestData.cholesterol <= targetData?.cholesterol) {

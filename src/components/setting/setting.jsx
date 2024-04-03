@@ -82,7 +82,6 @@ const Setting = () => {
         )
 
         const targetData = targetQuerySnapshot.docs[0].data();
-        console.log('targetData: ', targetData)
 
         // Check if any matching target document is found
         if (!targetData.empty) {
@@ -90,15 +89,15 @@ const Setting = () => {
             updateDoc(userDoc, {
                 target: targetData,
             }).then(() => {
+                alert("Your target values have been updated successfully!");
                 console.log("Document successfully updated!");
+                window.location.reload();
             }).catch((error) => {
                 console.error("Error updating document: ", error);
             });
         } else {
         console.log("No matching target document found.");
         }
-
-        console.log('target: ', userData.target)
     };
 
     
@@ -137,14 +136,6 @@ const Setting = () => {
             </Step>
             ))}
         </Stepper>
-        {activeStep === steps.length && (
-            <div>
-            <p>Your target values have been updated successfully!</p>
-            <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-                Reset
-            </Button>
-            </div>
-        )}
         </div>
     );
 };
