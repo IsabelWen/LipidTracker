@@ -23,6 +23,7 @@ const Login = () => {
     const navigate = useNavigate();
     const {dispatch} = useContext(AuthContext)
   
+    // Handles users login
     const handleLogin = (e) => {
         e.preventDefault();
     
@@ -40,6 +41,7 @@ const Login = () => {
         });
     }
 
+    // Handles users signup
     const handleSignup = (e) => {
         e.preventDefault();
 
@@ -52,6 +54,7 @@ const Login = () => {
                 createdAt: new Date()
             })
             .then(() => {
+                alert("Signup was successful!")
                 window.location.reload();
             })
             .catch((error) => {
