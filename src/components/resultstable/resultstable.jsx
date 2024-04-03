@@ -2,14 +2,15 @@ import "./resultstable.scss";
 import { resultsColumns } from "../../tableSource";
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { collection, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../firebase"
-import { auth } from "../../firebase";
+import { AuthContext } from "../../context/authContext";
 
 const Resultstable = () => {
   const [data, setData] = useState([]);
-  const user = auth.currentUser;
+  const {currentUser} = useContext(AuthContext)
+  const user = currentUser;
   const userUID = user.uid;
 
   useEffect(() => {

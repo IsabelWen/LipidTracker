@@ -7,8 +7,9 @@ import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
 import { collection, onSnapshot, doc, updateDoc, where, getDoc, query, getDocs } from "firebase/firestore";
-import { db, auth } from "../../firebase"
-import { useState } from "react";
+import { db } from "../../firebase"
+import { useState, useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 // Import components
 import Genderradio from "../genderradio/genderradio";
@@ -37,7 +38,8 @@ const steps = [
 const Setting = () => {
     const [data, setData] = useState([]);
     const [activeStep, setActiveStep] = useState(0);
-    const user = auth.currentUser;
+    const {currentUser} = useContext(AuthContext)
+    const user = currentUser;
     const userUID = user ? user.uid : null; 
 
     // Stepper
@@ -53,10 +55,6 @@ const Setting = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
     
-    const handleReset = () => {
-        setActiveStep(0);
-    };
-
     // Set new riskLevelID
     const handleChange = async (event) => {
         const usersCol = collection(db, "users");
@@ -75,12 +73,11 @@ const Setting = () => {
         const userGender = userData.gender;
         const userRiskLevel = userData.riskLevel;
 
-        console.log('userData: ', userData)
         // Query the targets collection to find the matching target document
         const targetQuerySnapshot = await getDocs(
             query(targetsCol, where("gender", "==", userGender), where("name", "==", userRiskLevel))
         )
-
+        
         const targetData = targetQuerySnapshot.docs[0].data();
 
         // Check if any matching target document is found

@@ -20,7 +20,7 @@ function App() {
     return currentUser ? (children) : <Navigate to="/login" />;
   };
 
-  console.log(currentUser);
+  //console.log(currentUser);
 
   return (
     <div className="app">
@@ -31,14 +31,14 @@ function App() {
             <Route index element={<RequireAuth><Home /></RequireAuth>} />
             <Route path="login" element={<Login />} />
             <Route path="results">
-              <Route index element={<Results />} />
-              <Route path="newresults" element={<Newresults inputs={resultsInputs} title="Add New Test Result" />} />
+              <Route index element={<RequireAuth><Results /></RequireAuth>} />
+              <Route path="newresults" element={<RequireAuth><Newresults inputs={resultsInputs} title="Add New Test Result" /></RequireAuth>} />
             </Route>
             <Route path="faq">
-              <Route index element={<FAQ />} />
+              <Route index element={<RequireAuth><FAQ /></RequireAuth>} />
             </Route>
             <Route path="settings">
-              <Route index element={<Settings />} />
+              <Route index element={<RequireAuth><Settings /></RequireAuth>} />
             </Route>
           </Route>
         </Routes>

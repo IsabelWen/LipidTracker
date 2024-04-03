@@ -2,13 +2,15 @@
 import "./hdlchart.scss"
 import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { collection, onSnapshot, where, query } from "firebase/firestore";
-import { db, auth } from "../../firebase"
-import { useEffect, useState } from "react";
+import { db } from "../../firebase"
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 // Main
 const HDLChart = () => {
     const [data, setData] = useState([]);
-    const user = auth.currentUser;
+    const {currentUser} = useContext(AuthContext)
+    const user = currentUser;
     const userUID = user.uid;
 
     useEffect(() => {

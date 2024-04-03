@@ -1,8 +1,9 @@
 // Imports
 import "./target.scss"
 import { collection, onSnapshot, query, where, doc } from "firebase/firestore";
-import { db, auth } from "../../firebase"
-import { useEffect, useState } from "react";
+import { db } from "../../firebase"
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 // Main
 const Target = () => {
@@ -13,7 +14,8 @@ const Target = () => {
         cholesterol: null
     });
     const [targetData, setTargetData] = useState({});
-    const user = auth.currentUser;
+    const {currentUser} = useContext(AuthContext)
+    const user = currentUser;
     const userUID = user.uid;
 
     // Get the latest result Data

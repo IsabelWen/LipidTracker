@@ -6,14 +6,16 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { collection, onSnapshot, doc, updateDoc } from "firebase/firestore";
-import { db, auth } from "../../firebase"
-import { useEffect, useState } from "react";
+import { db } from "../../firebase"
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 // Main
 const Riskselect = () => {
     const [data, setData] = useState([]);
     const [risk, setRisk] = useState('');
-    const user = auth.currentUser;
+    const {currentUser} = useContext(AuthContext)
+    const user = currentUser;
     const userUID = user ? user.uid : null; 
 
     // Database access to show Risk Levels

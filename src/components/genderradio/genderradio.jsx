@@ -6,13 +6,15 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { collection, updateDoc, doc } from "firebase/firestore";
-import { db, auth } from "../../firebase"
-import { useState } from "react";
+import { db } from "../../firebase"
+import { useState, useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 // Main
 const Genderradio = () => {
     const [data, setData] = useState('none');
-    const user = auth.currentUser;
+    const {currentUser} = useContext(AuthContext)
+    const user = currentUser;
     const userUID = user ? user.uid : null; 
 
     const handleInput = (event) => {
@@ -40,7 +42,7 @@ const Genderradio = () => {
             >
                 <FormControlLabel value="female" control={<Radio />} label="Female" />
                 <FormControlLabel value="male" control={<Radio />} label="Male" />
-                <FormControlLabel value="other" control={<Radio />} label="Other" />
+                <FormControlLabel value="none" control={<Radio />} label="Other" />
             </RadioGroup>
         </FormControl>
     );
