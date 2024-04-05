@@ -50,7 +50,7 @@ const HDLChart = () => {
                 <h1 className="title">HDL Bar Chart</h1>
             </div>
             <hr />
-            <ResponsiveContainer width="100%" aspect={2.5 / 1}>
+            <ResponsiveContainer width="100%" aspect={2 / 1}>
                 <BarChart
                     width={500}
                     height={300}
