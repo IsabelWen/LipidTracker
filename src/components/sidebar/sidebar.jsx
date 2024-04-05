@@ -1,6 +1,6 @@
 // Imports
 import "./sidebar.scss"
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { getAuth, signOut } from "firebase/auth";
@@ -11,13 +11,22 @@ import BiotechOutlinedIcon from '@mui/icons-material/BiotechOutlined';
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 
 // Main
 const Sidebar = () => {
     const navigate = useNavigate();
     const { dispatch } = useContext(AuthContext);
     const auth = getAuth();
-  
+    const [nav, setNav] = useState(window.innerWidth <= 1200 ? true : false)
+    
+    // Function to toggle sidebar
+    const showNav = () => {
+        setNav(!nav);
+    }
+
+    // Function to handle logout
     const handleLogout = () => {
         signOut(auth)
         .then(() => {
@@ -30,11 +39,22 @@ const Sidebar = () => {
     };
 
     return (
-        <div className="sidebar">
+        <>
+        <div className={nav ? "toggle collapse" : "toggle"}>
+            <Link to="#">
+                <MenuOutlinedIcon className="icon" onClick={showNav}/>
+            </Link>
+        </div>
+        <div className={nav ? "sidebar collapse" : "sidebar"}>
             <div className="top">
                 <Link to="/" style={{ textDecoration: "none" }}>
                     <span className="logo">LipidTracker</span>
                 </Link>
+                {window.innerWidth <= 1200 ?
+                    <Link to="#">
+                        <CloseOutlinedIcon className="close-icon" onClick={showNav}/>
+                    </Link>
+                : null}
             </div>
             <hr />
             <div className="center">
@@ -77,6 +97,7 @@ const Sidebar = () => {
                 </ul>
             </div>
         </div>
+        </>
     );
 };
 
