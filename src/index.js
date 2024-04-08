@@ -9,6 +9,5 @@ root.render(
         <AuthContextProvider>
             <App />
         </AuthContextProvider>
-    </React.StrictMode>,
-    document.getElementById("root")
+    </React.StrictMode>
 );
