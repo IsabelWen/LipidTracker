@@ -6,10 +6,11 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
-import { collection, onSnapshot, doc, updateDoc, where, getDoc, query, getDocs } from "firebase/firestore";
+import { collection, doc, updateDoc, where, getDoc, query, getDocs } from "firebase/firestore";
 import { db } from "../../firebase"
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 // Import components
 import Genderradio from "../genderradio/genderradio";
@@ -41,6 +42,7 @@ const Setting = () => {
     const {currentUser} = useContext(AuthContext)
     const user = currentUser;
     const userUID = user ? user.uid : null; 
+    const navigate = useNavigate();
 
     // Stepper
     const handleNext = () => {
@@ -88,7 +90,7 @@ const Setting = () => {
             }).then(() => {
                 alert("Your target values have been updated successfully!");
                 console.log("Document successfully updated!");
-                window.location.reload();
+                navigate("/");
             }).catch((error) => {
                 console.error("Error updating document: ", error);
             });

@@ -55,7 +55,7 @@ const Login = () => {
             })
             .then(() => {
                 alert("Signup was successful!")
-                window.location.reload();
+                setValue('1');
             })
             .catch((error) => {
                 setError(true)
