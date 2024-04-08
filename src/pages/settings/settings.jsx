@@ -9,7 +9,7 @@ import Setting from "../../components/setting/setting";
 const Settings = () => {
     return (
         <div className="settings">
-            <Sidebar />
+            <Sidebar className="sidebar"/>
             <div className="settingsContainer">
                 <Setting/>
             </div>

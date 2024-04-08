@@ -12,7 +12,7 @@ import HDLChart from "../../components/hdlchart/hdlchart";
 const Home = () => {
     return (
         <div className="home">
-            <Sidebar />
+            <Sidebar className="sidebar"/>
             <div className="homeContainer">
                 <div className="homeTitle">Dashboard</div>
                 <div className="homeContent">

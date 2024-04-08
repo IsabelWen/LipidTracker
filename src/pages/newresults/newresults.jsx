@@ -47,7 +47,7 @@ const Newresults = ({ inputs }) => {
 
     return (
         <div className="new">
-            <Sidebar />
+            <Sidebar className="sidebar"/>
             <div className="newContainer">
                 <div className="top">
                     <div className="title">Add New Test Result</div>

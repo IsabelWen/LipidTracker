@@ -9,7 +9,7 @@ import Resultstable from "../../components/resultstable/resultstable";
 const Results = () => {
     return (
         <div className="results">
-            <Sidebar />
+            <Sidebar className="sidebar"/>
             <div className="resultsContainer">
                 <Resultstable />
             </div>

@@ -1,6 +1,15 @@
 .new {
     width: 100%;
     display: flex;
+
+    @media (max-width: 600px) {
+      .sidebar {
+          width: 100%;
+          position: fixed; 
+          height: 100vh;
+          z-index: 3;
+      }
+    }
   
     .newContainer {
       flex: 6;

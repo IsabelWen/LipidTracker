@@ -45,7 +45,7 @@ const Chart = () => {
                 <h1 className="title">Cholesterol Line Chart</h1>
             </div>
             <hr />
-            <ResponsiveContainer width="100%" aspect={4 / 1}>
+            <ResponsiveContainer width="100%" height='90%'>
                     <LineChart
                         width={500}
                         height={300}

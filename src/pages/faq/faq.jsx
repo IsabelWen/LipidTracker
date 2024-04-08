@@ -9,7 +9,7 @@ import Questions from "../../components/questions/questions";
 const FAQ = () => {
     return (
         <div className="faq">
-            <Sidebar />
+            <Sidebar className="sidebar"/>
             <div className="faqContainer">
                 <Questions />
             </div>

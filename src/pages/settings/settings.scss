@@ -1,6 +1,16 @@
 .settings {
     display: flex;
     width: 100%;
+
+    @media (max-width: 600px) {
+      .sidebar {
+          width: 100%;
+          position: fixed; 
+          height: 100vh;
+          z-index: 3;
+      }
+  }
+  
     .settingsContainer {
       flex: 6;
     }
