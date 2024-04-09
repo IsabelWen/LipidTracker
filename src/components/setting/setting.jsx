@@ -37,7 +37,6 @@ const steps = [
 
 // Main
 const Setting = () => {
-    const [data, setData] = useState([]);
     const [activeStep, setActiveStep] = useState(0);
     const {currentUser} = useContext(AuthContext)
     const user = currentUser;
@@ -117,7 +116,7 @@ const Setting = () => {
                     <div>
                     <Button
                         variant="contained"
-                        sx={{ mt: 1, mr: 1 , background:' #00796b'}}
+                        sx={{ mt: 1, mr: 1 , background:' #00796b', '&:hover': {backgroundColor: '#00796b'}}}
                         onClick={handleNext}
                     >
                         {index === steps.length - 1 ? 'Finish' : 'Continue'}
