@@ -4,6 +4,14 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    .MuiTab-root.Mui-selected {
+        color: #00796b;
+    }
+
+    .MuiTabs-indicator {
+        background-color: #00796b;
+    }
 }
 
 form {

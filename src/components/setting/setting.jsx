@@ -117,7 +117,7 @@ const Setting = () => {
                     <div>
                     <Button
                         variant="contained"
-                        sx={{ mt: 1, mr: 1 }}
+                        sx={{ mt: 1, mr: 1 , background:' #00796b'}}
                         onClick={handleNext}
                     >
                         {index === steps.length - 1 ? 'Finish' : 'Continue'}
@@ -125,7 +125,7 @@ const Setting = () => {
                     <Button
                         disabled={index === 0}
                         onClick={handleBack}
-                        sx={{ mt: 1, mr: 1 }}
+                        sx={{ mt: 1, mr: 1, color:' #00796b'}}
                     >
                         Back
                     </Button>
