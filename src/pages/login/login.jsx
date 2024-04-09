@@ -74,6 +74,7 @@ const Login = () => {
 
     return (
         <div className="login">
+            <h1>LipidTracker</h1><br/><br/>
             <TabContext value={value}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <TabList onChange={handleChange} aria-label="API tabs">
