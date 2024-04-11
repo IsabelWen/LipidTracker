@@ -9,6 +9,7 @@ export const resultsInputs = [
     {
       id: "cholesterol",
       label: "Cholesterol",
+      unitLabel: "(mg/ml)",
       type: "number",
       min: 0,
       max: 1500,
@@ -17,6 +18,7 @@ export const resultsInputs = [
     {
       id: "hdl",
       label: "HDL-Cholesterol",
+      unitLabel: "(mg/ml)",
       type: "number",
       step: "0.1",
       min: 0,
@@ -26,6 +28,7 @@ export const resultsInputs = [
     {
       id: "ldl",
       label: "LDL-Cholesterol",
+      unitLabel: "(mg/ml)",
       type: "number",
       min: 0,
       max: 1500,
@@ -34,6 +37,7 @@ export const resultsInputs = [
     {
       id: "triglycerides",
       label: "Triglycerides",
+      unitLabel: "(mg/ml)",
       type: "number",
       min: 0,
       max: 10000,

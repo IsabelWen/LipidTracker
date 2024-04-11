@@ -57,7 +57,10 @@ const Newresults = ({ inputs }) => {
                         <form onSubmit={handleAdd}>
                             {inputs.map((input) => (
                                 <div className="formInput" key={input.id}>
-                                    <label>{input.label}</label>
+                                    <label>
+                                        {input.label}
+                                        <small>{input.unitLabel}</small>
+                                    </label>
                                     <input id={input.id} 
                                     type={input.type} 
                                     placeholder={input.placeholder} 

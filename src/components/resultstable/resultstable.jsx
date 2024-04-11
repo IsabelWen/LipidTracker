@@ -43,8 +43,8 @@ const Resultstable = () => {
   const deleteColumn = [
     {
       field: "delete",
-      headerName: "Delete Test Result",
-      width: 200,
+      headerName: "Delete Test",
+      width: 120,
       sortable: false,
       renderCell: (params) => {
         return (
