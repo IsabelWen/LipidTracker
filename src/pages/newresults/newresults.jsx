@@ -61,6 +61,7 @@ const Newresults = ({ inputs }) => {
                                     <input id={input.id} 
                                     type={input.type} 
                                     placeholder={input.placeholder} 
+                                    min={input.min}
                                     max={input.max}
                                     maxLength={input.maxLength}
                                     step={input.step}

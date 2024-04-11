@@ -10,7 +10,8 @@ export const resultsInputs = [
       id: "cholesterol",
       label: "Cholesterol",
       type: "number",
-      max: 1000,
+      min: 0,
+      max: 1500,
       placeholder: "Cholesterol",
     },
     {
@@ -18,21 +19,24 @@ export const resultsInputs = [
       label: "HDL-Cholesterol",
       type: "number",
       step: "0.1",
-      max: 120,
+      min: 0,
+      max: 500,
       placeholder: "HDL-Cholesterol (example: 39.3)",
     },
     {
       id: "ldl",
       label: "LDL-Cholesterol",
       type: "number",
-      max: 1000,
+      min: 0,
+      max: 1500,
       placeholder: "LDL-Cholesterol",
     },
     {
       id: "triglycerides",
       label: "Triglycerides",
       type: "number",
-      max: 1500,
+      min: 0,
+      max: 10000,
       placeholder: "Triglycerides"
     },
     {
