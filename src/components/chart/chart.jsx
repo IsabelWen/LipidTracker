@@ -39,6 +39,13 @@ const Chart = () => {
         };
     }, []);
 
+    // Extracting the highest values of all
+    const highestCholesterol = Math.max(...data.map(item => item.cholesterol).filter(value => value!== undefined));
+    const highestLdl = Math.max(...data.map(item => item.ldl).filter(value => value!== undefined));
+    const highestHdl = Math.max(...data.map(item => item.hdl).filter(value => value!== undefined));
+    const highestCholLdl = Math.max(highestLdl, highestCholesterol)
+    const highestValue = Math.max(highestHdl, highestCholLdl);
+
     return (
         <div className="chart">
             <div className="top">
@@ -59,7 +66,7 @@ const Chart = () => {
                     >
                         <CartesianGrid strokeDasharray="3 3" className="chartGrid" />
                         <XAxis dataKey="date" stroke="gray" />
-                        <YAxis type="number" domain={[0, 400]} stroke="gray" />
+                        <YAxis type="number" domain={[0, highestValue+5]} stroke="gray" />
                         <Tooltip />
                         <Legend />
                         <Line type="monotone"

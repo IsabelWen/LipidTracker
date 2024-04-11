@@ -39,6 +39,9 @@ const TriChart = () => {
         };
     }, []);
 
+    // Extracting the highest triglycerides value from the data
+    const highestTriglycerides = Math.max(...data.map(item => item.triglycerides));
+
     return (
         <div className="chart">
             <div className="top">
@@ -59,7 +62,7 @@ const TriChart = () => {
                 >
                     <CartesianGrid strokeDasharray="3 3" className="chartGrid" />
                     <XAxis dataKey="date" stroke="gray" />
-                    <YAxis type="number" domain={[0, 1000]} stroke="gray" />
+                    <YAxis type="number" domain={[0, highestTriglycerides+5]} stroke="gray" />
                     <Tooltip />
                     <Legend />
                     <Line type="monotone"

@@ -42,7 +42,8 @@ const HDLChart = () => {
         };
     }, []);
 
-    
+    // Extracting the highest HDL value from the data
+    const highestHdl = Math.max(...data.map(item => item.hdl));
 
     return (
         <div className="hdlchart">
@@ -64,7 +65,7 @@ const HDLChart = () => {
                 >
                     <CartesianGrid strokeDasharray="3 3" className="chartGrid" />
                     <XAxis dataKey="date" stroke="gray" />
-                    <YAxis type="number" domain={[0, 80]} stroke="gray" />
+                    <YAxis type="number" domain={[0, highestHdl+5]} stroke="gray" />
                     <Tooltip cursor={{fill: 'transparent'}}/>
                     <Legend />
                         <Bar dataKey="hdl" 

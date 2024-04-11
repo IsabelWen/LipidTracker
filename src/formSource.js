@@ -21,7 +21,7 @@ export const resultsInputs = [
       step: "0.1",
       min: 0,
       max: 500,
-      placeholder: "HDL-Cholesterol (example: 39.3)",
+      placeholder: "HDL-Cholesterol between (example: 39.3)",
     },
     {
       id: "ldl",
