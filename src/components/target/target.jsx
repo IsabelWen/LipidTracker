@@ -78,40 +78,69 @@ const Target = () => {
         latestData.triglycerides = 'No Data';
     }
 
-    // Cholesterol Width
-    let CholesterolWidth = 0;
-    if (latestData.cholesterol <= targetData?.cholesterol) {
-        CholesterolWidth = "100%";
-    } else {
-        let CholesterolPercentage = parseInt((targetData?.cholesterol*100)/(latestData.cholesterol));
-        CholesterolWidth = CholesterolPercentage + "%";
+    // function to calculate the percentage of reaching target for HDL
+    const calcPercentageHDL = (Target, Latest) => {
+        let Percentage = 0;
+        Percentage = parseInt((Latest*100)/Target);
+
+        return Percentage;
     }
 
-    // HDL width
-    let HDLWidth = 0;
-    if (latestData.hdl >= targetData?.hdl) {
-        HDLWidth = "100%"
-    } else {
-        let HDLPercentage = parseInt((latestData.hdl*100)/targetData?.hdl);
-        HDLWidth = HDLPercentage + "%";
+    // function for progress bar width for HDL
+    const showWidthHDL = (Target, Latest) => {
+        let Width = Latest;
+        let Percentage = calcPercentageHDL(Target, Latest);
+        if (Latest >= Target) {
+            Width = "100%";
+        } else {
+            Width = Percentage + "%";
+        }
+        
+        return Width;
     }
 
-    // LDL width
-    let LDLWidth = latestData.ldl;
-    if (LDLWidth <= targetData?.ldl) {
-        LDLWidth = "100%"
-    } else {
-        let LDLPercentage = parseInt((targetData?.ldl * 100) / latestData.ldl);
-        LDLWidth = LDLPercentage + "%";
+    // function to calculate the percentage of reaching target for Cholesterol, LDL and Triglycerides
+    const calcPercentage = (Target, Latest) => {
+        let Percentage = 0;
+        Percentage = parseInt((Target * 100) / Latest);
+
+        return Percentage;
     }
 
-    // LDL width
-    let TriglycerideWidth = latestData.triglycerides;
-    if (TriglycerideWidth <= targetData?.triglycerides) {
-        TriglycerideWidth = "100%";
-    } else {
-        let TriglyceridePercentage = parseInt((targetData?.triglycerides * 100) / latestData.triglycerides);
-        TriglycerideWidth = TriglyceridePercentage + "%";
+    // function for progress bar width for Cholesterol, LDL and Triglycerides
+    const showWidth = (Target, Latest) => {
+        let Width = Latest;
+        let Percentage = calcPercentage(Target, Latest);
+        if (Latest <= Target) {
+            Width = "100%";
+        } else {
+            Width = Percentage + "%";
+        }
+
+        return Width;
+    }
+
+    // function for progressbar color
+    const showColor = (Target, Latest) => {
+        let Percentage = 0;
+        if (Latest === latestData.hdl) {
+            Percentage = calcPercentageHDL(Target, Latest)
+        } else {
+            Percentage = calcPercentage(Target, Latest);
+        }
+        
+        let ProgressColor = '#00796b';
+        if (Percentage >= 75) {
+            ProgressColor = "#228B22";
+        } else if (Percentage >= 50 ) {
+            ProgressColor = "#D5B60A";
+        } else if (Percentage >= 25) {
+            ProgressColor = "#ff8c00";
+        } else if (Percentage < 25) {
+            ProgressColor = "#AA0C0C";
+        }
+
+        return ProgressColor;
     }
 
     return (
@@ -123,19 +152,43 @@ const Target = () => {
             <div className="bottom">
                 <p><b>Cholesterol</b>(mg/dL): Target {targetData?.cholesterol} | Current {latestData.cholesterol}</p>
                 <div className="progressbar">
-                    <div className="progress" style={{width: CholesterolWidth}}>{CholesterolWidth}</div>
+                    <div className="progress" 
+                        style={{
+                            width: showWidth(targetData?.cholesterol, latestData.cholesterol), 
+                            backgroundColor: showColor(targetData?.cholesterol, latestData.cholesterol)
+                        }}>
+                            {showWidth(targetData?.cholesterol, latestData.cholesterol)}
+                    </div>
                 </div>
                 <p><b>HDL-Cholesterol</b>(mg/dL): Target {targetData?.hdl} | Current {latestData.hdl}</p>
                 <div className="progressbar">
-                    <div className="progress" style={{width: HDLWidth}}>{HDLWidth}</div>
+                    <div className="progress" 
+                        style={{
+                            width: showWidthHDL(targetData?.hdl, latestData.hdl), 
+                            backgroundColor: showColor(targetData?.hdl, latestData.hdl)
+                        }}>
+                            {showWidthHDL(targetData?.hdl, latestData.hdl)}
+                    </div>
                 </div>
                 <p><b>LDL-Cholesterol</b>(mg/dL): Target {targetData?.ldl} | Current {latestData.ldl}</p>
                 <div className="progressbar">
-                    <div className="progress" style={{width: LDLWidth}}>{LDLWidth}</div>
+                    <div className="progress" 
+                        style={{
+                            width: showWidth(targetData?.ldl, latestData.ldl), 
+                            backgroundColor: showColor(targetData?.ldl, latestData.ldl)
+                        }}>
+                            {showWidth(targetData?.ldl, latestData.ldl)}
+                    </div>
                 </div>
                 <p><b>Triglycerides</b>(mg/dL): Target {targetData?.triglycerides} | Current {latestData.triglycerides}</p>
                 <div className="progressbar">
-                    <div className="progress" style={{width: TriglycerideWidth}}>{TriglycerideWidth}</div>
+                    <div className="progress" 
+                        style={{
+                            width: showWidth(targetData?.triglycerides, latestData.triglycerides), 
+                            backgroundColor: showColor(targetData?.triglycerides, latestData.triglycerides)
+                        }}>
+                            {showWidth(targetData?.triglycerides, latestData.triglycerides)}
+                    </div>
                 </div>
             </div>
         </div>
