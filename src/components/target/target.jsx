@@ -131,13 +131,13 @@ const Target = () => {
         
         let ProgressColor = '#00796b';
         if (percentage >= 75) {
-            ProgressColor = "#008040";
+            ProgressColor = "linear-gradient(to right, rgba(170,12,12,1) 0%, rgba(230,87,34,1) 20%, rgba(213,182,10,1) 45%, rgba(0, 128, 64, 1) 80%)";
         } else if (percentage >= 50 ) {
-            ProgressColor = "#D5B60A";
+            ProgressColor = "linear-gradient(to right, rgba(170,12,12,1) 0%, rgba(230,87,34,1) 25%, rgba(213,182,10,1) 60%)";
         } else if (percentage >= 25) {
-            ProgressColor = "#E65722";
+            ProgressColor = "linear-gradient(to right, rgba(170,12,12,1) 0%, rgba(230,87,34,1) 50%)";
         } else if (percentage < 25) {
-            ProgressColor = "#AA0C0C";
+            ProgressColor = "linear-gradient(to right, rgba(170,12,12,1) 0%, rgba(230,87,34,1) 100%)";
         }
 
         return ProgressColor;
@@ -162,7 +162,7 @@ const Target = () => {
         } else if (percentage >= 25) {
             Message = "Keep trying!";
         } else if (percentage < 25) {
-            Message = "Need to Improve";
+            Message = "Careful!";
         }
 
         return Message;
@@ -180,7 +180,7 @@ const Target = () => {
                     <div className="progress" 
                         style={{
                             width: showWidth(targetData?.cholesterol, latestData.cholesterol), 
-                            backgroundColor: showColor(targetData?.cholesterol, latestData.cholesterol)
+                            background: showColor(targetData?.cholesterol, latestData.cholesterol)
                         }}>
                             {showMessage(targetData?.cholesterol, latestData.cholesterol)}
                     </div>
@@ -190,7 +190,7 @@ const Target = () => {
                     <div className="progress" 
                         style={{
                             width: showWidthHDL(targetData?.hdl, latestData.hdl), 
-                            backgroundColor: showColor(targetData?.hdl, latestData.hdl)
+                            background: showColor(targetData?.hdl, latestData.hdl)
                         }}>
                             {showMessage(targetData?.hdl, latestData.hdl)}
                     </div>
@@ -200,7 +200,7 @@ const Target = () => {
                     <div className="progress" 
                         style={{
                             width: showWidth(targetData?.ldl, latestData.ldl), 
-                            backgroundColor: showColor(targetData?.ldl, latestData.ldl)
+                            background: showColor(targetData?.ldl, latestData.ldl)
                         }}>
                             {showMessage(targetData?.ldl, latestData.ldl)}
                     </div>
@@ -210,7 +210,7 @@ const Target = () => {
                     <div className="progress" 
                         style={{
                             width: showWidth(targetData?.triglycerides, latestData.triglycerides), 
-                            backgroundColor: showColor(targetData?.triglycerides, latestData.triglycerides)
+                            background: showColor(targetData?.triglycerides, latestData.triglycerides)
                         }}>
                             {showMessage(targetData?.triglycerides, latestData.triglycerides)}
                     </div>
