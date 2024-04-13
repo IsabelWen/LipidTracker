@@ -79,68 +79,93 @@ const Target = () => {
     }
 
     // function to calculate the percentage of reaching target for HDL
-    const calcPercentageHDL = (Target, Latest) => {
-        let Percentage = 0;
-        Percentage = parseInt((Latest*100)/Target);
+    const calcPercentageHDL = (target, latest) => {
+        let percentage = 0;
+        percentage = parseInt((latest*100)/target);
 
-        return Percentage;
+        return percentage;
     }
 
     // function for progress bar width for HDL
-    const showWidthHDL = (Target, Latest) => {
-        let Width = Latest;
-        let Percentage = calcPercentageHDL(Target, Latest);
-        if (Latest >= Target) {
+    const showWidthHDL = (target, latest) => {
+        let Width = latest;
+        let percentage = calcPercentageHDL(target, latest);
+        if (latest >= target) {
             Width = "100%";
         } else {
-            Width = Percentage + "%";
+            Width = percentage + "%";
         }
         
         return Width;
     }
 
     // function to calculate the percentage of reaching target for Cholesterol, LDL and Triglycerides
-    const calcPercentage = (Target, Latest) => {
-        let Percentage = 0;
-        Percentage = parseInt((Target * 100) / Latest);
+    const calcPercentage = (target, latest) => {
+        let percentage = 0;
+        percentage = parseInt((target * 100) / latest);
 
-        return Percentage;
+        return percentage;
     }
 
     // function for progress bar width for Cholesterol, LDL and Triglycerides
-    const showWidth = (Target, Latest) => {
-        let Width = Latest;
-        let Percentage = calcPercentage(Target, Latest);
-        if (Latest <= Target) {
+    const showWidth = (target, latest) => {
+        let Width = latest;
+        let percentage = calcPercentage(target, latest);
+        if (latest <= target) {
             Width = "100%";
         } else {
-            Width = Percentage + "%";
+            Width = percentage + "%";
         }
 
         return Width;
     }
 
     // function for progressbar color
-    const showColor = (Target, Latest) => {
-        let Percentage = 0;
-        if (Latest === latestData.hdl) {
-            Percentage = calcPercentageHDL(Target, Latest)
+    const showColor = (target, latest) => {
+        let percentage = 0;
+        if (latest === latestData.hdl) {
+            percentage = calcPercentageHDL(target, latest)
         } else {
-            Percentage = calcPercentage(Target, Latest);
+            percentage = calcPercentage(target, latest);
         }
         
         let ProgressColor = '#00796b';
-        if (Percentage >= 75) {
+        if (percentage >= 75) {
             ProgressColor = "#228B22";
-        } else if (Percentage >= 50 ) {
+        } else if (percentage >= 50 ) {
             ProgressColor = "#D5B60A";
-        } else if (Percentage >= 25) {
+        } else if (percentage >= 25) {
             ProgressColor = "#ff8c00";
-        } else if (Percentage < 25) {
+        } else if (percentage < 25) {
             ProgressColor = "#AA0C0C";
         }
 
         return ProgressColor;
+    }
+
+    // function for progressbar color
+    const showMessage = (target, latest) => {
+        let percentage = 0;
+        if (latest === latestData.hdl) {
+            percentage = calcPercentageHDL(target, latest)
+        } else {
+            percentage = calcPercentage(target, latest);
+        }
+
+        let Message = 'No Data';
+        if (percentage >= 100) {
+            Message = "Goal reached!";
+        } else if (percentage >= 75) {
+            Message = "Excellent progress!";
+        } else if (percentage >= 50) {
+            Message = "Good progress!";
+        } else if (percentage >= 25) {
+            Message = "Keep trying!";
+        } else if (percentage < 25) {
+            Message = "Need to Improve";
+        }
+
+        return Message;
     }
 
     return (
@@ -157,7 +182,7 @@ const Target = () => {
                             width: showWidth(targetData?.cholesterol, latestData.cholesterol), 
                             backgroundColor: showColor(targetData?.cholesterol, latestData.cholesterol)
                         }}>
-                            {showWidth(targetData?.cholesterol, latestData.cholesterol)}
+                            {showMessage(targetData?.cholesterol, latestData.cholesterol)}
                     </div>
                 </div>
                 <p><b>HDL-Cholesterol</b>(mg/dL): Target {targetData?.hdl} | Current {latestData.hdl}</p>
@@ -167,7 +192,7 @@ const Target = () => {
                             width: showWidthHDL(targetData?.hdl, latestData.hdl), 
                             backgroundColor: showColor(targetData?.hdl, latestData.hdl)
                         }}>
-                            {showWidthHDL(targetData?.hdl, latestData.hdl)}
+                            {showMessage(targetData?.hdl, latestData.hdl)}
                     </div>
                 </div>
                 <p><b>LDL-Cholesterol</b>(mg/dL): Target {targetData?.ldl} | Current {latestData.ldl}</p>
@@ -177,7 +202,7 @@ const Target = () => {
                             width: showWidth(targetData?.ldl, latestData.ldl), 
                             backgroundColor: showColor(targetData?.ldl, latestData.ldl)
                         }}>
-                            {showWidth(targetData?.ldl, latestData.ldl)}
+                            {showMessage(targetData?.ldl, latestData.ldl)}
                     </div>
                 </div>
                 <p><b>Triglycerides</b>(mg/dL): Target {targetData?.triglycerides} | Current {latestData.triglycerides}</p>
@@ -187,7 +212,7 @@ const Target = () => {
                             width: showWidth(targetData?.triglycerides, latestData.triglycerides), 
                             backgroundColor: showColor(targetData?.triglycerides, latestData.triglycerides)
                         }}>
-                            {showWidth(targetData?.triglycerides, latestData.triglycerides)}
+                            {showMessage(targetData?.triglycerides, latestData.triglycerides)}
                     </div>
                 </div>
             </div>
