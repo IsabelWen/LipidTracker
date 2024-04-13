@@ -131,11 +131,11 @@ const Target = () => {
         
         let ProgressColor = '#00796b';
         if (percentage >= 75) {
-            ProgressColor = "#228B22";
+            ProgressColor = "#008040";
         } else if (percentage >= 50 ) {
             ProgressColor = "#D5B60A";
         } else if (percentage >= 25) {
-            ProgressColor = "#ff8c00";
+            ProgressColor = "#E65722";
         } else if (percentage < 25) {
             ProgressColor = "#AA0C0C";
         }
