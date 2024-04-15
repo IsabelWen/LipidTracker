@@ -4,6 +4,7 @@ import { collection, onSnapshot, query, where, doc } from "firebase/firestore";
 import { db } from "../../firebase"
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
+import Tooltip from '@mui/material/Tooltip';
 
 // Main
 const Target = () => {
@@ -175,46 +176,59 @@ const Target = () => {
             </div>
             <hr/>
             <div className="bottom">
-                <p><b>Cholesterol</b>(mg/dL): Target {targetData?.cholesterol} | Current {latestData.cholesterol}</p>
-                <div className="progressbar">
-                    <div className="progress" 
-                        style={{
-                            width: showWidth(targetData?.cholesterol, latestData.cholesterol), 
-                            background: showColor(targetData?.cholesterol, latestData.cholesterol)
-                        }}>
-                            {showMessage(targetData?.cholesterol, latestData.cholesterol)}
+
+                <p><b>Cholesterol</b>(mg/dL):</p>
+                <Tooltip  placement="top-end" title={<>Target {targetData?.cholesterol} | Current {latestData?.cholesterol}</>}>
+                    <div className="progressbar">
+                        <div className="progress" 
+                            style={{
+                                width: showWidth(targetData?.cholesterol, latestData.cholesterol), 
+                                background: showColor(targetData?.cholesterol, latestData.cholesterol)
+                            }}>
+                                {showMessage(targetData?.cholesterol, latestData.cholesterol)}
+                        </div>
                     </div>
-                </div>
-                <p><b>HDL-Cholesterol</b>(mg/dL): Target {targetData?.hdl} | Current {latestData.hdl}</p>
-                <div className="progressbar">
-                    <div className="progress" 
-                        style={{
-                            width: showWidthHDL(targetData?.hdl, latestData.hdl), 
-                            background: showColor(targetData?.hdl, latestData.hdl)
-                        }}>
-                            {showMessage(targetData?.hdl, latestData.hdl)}
+                </Tooltip>
+
+                <p><b>HDL-Cholesterol</b>(mg/dL):</p>
+                <Tooltip  placement="top-end" title={<>Target {targetData?.hdl} | Current {latestData.hdl}</>}>
+                    <div className="progressbar">
+                        <div className="progress" 
+                            style={{
+                                width: showWidthHDL(targetData?.hdl, latestData.hdl), 
+                                background: showColor(targetData?.hdl, latestData.hdl)
+                            }}>
+                                {showMessage(targetData?.hdl, latestData.hdl)}
+                        </div>
                     </div>
-                </div>
-                <p><b>LDL-Cholesterol</b>(mg/dL): Target {targetData?.ldl} | Current {latestData.ldl}</p>
-                <div className="progressbar">
-                    <div className="progress" 
-                        style={{
-                            width: showWidth(targetData?.ldl, latestData.ldl), 
-                            background: showColor(targetData?.ldl, latestData.ldl)
-                        }}>
-                            {showMessage(targetData?.ldl, latestData.ldl)}
+                </Tooltip>
+                
+
+                <p><b>LDL-Cholesterol</b>(mg/dL):</p>
+                <Tooltip  placement="top-end" title={<>Target {targetData?.ldl} | Current {latestData.ldl}</>}>
+                    <div className="progressbar">
+                        <div className="progress" 
+                            style={{
+                                width: showWidth(targetData?.ldl, latestData.ldl), 
+                                background: showColor(targetData?.ldl, latestData.ldl)
+                            }}>
+                                {showMessage(targetData?.ldl, latestData.ldl)}
+                        </div>
                     </div>
-                </div>
-                <p><b>Triglycerides</b>(mg/dL): Target {targetData?.triglycerides} | Current {latestData.triglycerides}</p>
-                <div className="progressbar">
-                    <div className="progress" 
-                        style={{
-                            width: showWidth(targetData?.triglycerides, latestData.triglycerides), 
-                            background: showColor(targetData?.triglycerides, latestData.triglycerides)
-                        }}>
-                            {showMessage(targetData?.triglycerides, latestData.triglycerides)}
+                </Tooltip>
+                
+                <p><b>Triglycerides</b>(mg/dL):</p>
+                <Tooltip  placement="top-end" title={<>Target {targetData?.triglycerides} | Current {latestData.triglycerides}</>}>
+                    <div className="progressbar">
+                        <div className="progress" 
+                            style={{
+                                width: showWidth(targetData?.triglycerides, latestData.triglycerides), 
+                                background: showColor(targetData?.triglycerides, latestData.triglycerides)
+                            }}>
+                                {showMessage(targetData?.triglycerides, latestData.triglycerides)}
+                        </div>
                     </div>
-                </div>
+                </Tooltip>
             </div>
         </div>
     );
