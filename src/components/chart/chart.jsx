@@ -73,21 +73,21 @@ const Chart = () => {
                         name="Cholesterol"
                         connectNulls
                         dataKey="cholesterol"
-                        stroke="#1578CF"
+                        stroke="#619ED6"
                         strokeWidth="2"
                         activeDot={{ r: 8 }} />
                         <Line type="monotone"
                         name="LDL-Cholesterol"
                         connectNulls
                         dataKey="ldl"
-                        stroke="#077368"
+                        stroke="#E48F1B"
                         strokeWidth="2"
                         activeDot={{ r: 8 }} />
                         <Line type="monotone"
                         name="Triglycerides"
                         connectNulls
                         dataKey="triglycerides"
-                        stroke="#4A5596"
+                        stroke="#E64345"
                         strokeWidth="2"
                         activeDot={{ r: 8 }} />
                         <Line
