@@ -52,7 +52,7 @@ const Chart = () => {
                 <h1 className="title">Cholesterol Line Chart</h1>
             </div>
             <hr />
-            <ResponsiveContainer width="100%" height='90%'>
+            <ResponsiveContainer width="100%" height='85%'>
                     <LineChart
                         width={500}
                         height={300}
@@ -84,9 +84,9 @@ const Chart = () => {
                         strokeWidth="2"
                         activeDot={{ r: 8 }} />
                         <Line type="monotone"
-                        name="HDL-Cholesterol"
+                        name="Triglycerides"
                         connectNulls
-                        dataKey="hdl"
+                        dataKey="triglycerides"
                         stroke="#4A5596"
                         strokeWidth="2"
                         activeDot={{ r: 8 }} />
