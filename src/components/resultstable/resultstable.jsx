@@ -13,6 +13,7 @@ const Resultstable = () => {
   const user = currentUser;
   const userUID = user.uid;
 
+  // Get users test results
   useEffect(() => {
     const unsub = onSnapshot(
       query(collection(db, "results"), where("userID", "==", userUID)), (snapShot) => {
@@ -31,6 +32,7 @@ const Resultstable = () => {
     };
   }, [userUID]);
 
+  // Function to Delete test results
   const handleDelete = async (id) => {
     try{
       await deleteDoc(doc(db, "results", id));

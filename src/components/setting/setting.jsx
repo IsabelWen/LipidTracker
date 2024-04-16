@@ -6,9 +6,9 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
-import { collection, doc, updateDoc, where, getDoc, query, getDocs } from "firebase/firestore";
+import { collection, doc, updateDoc, where, getDoc, query, getDocs, onSnapshot, setData } from "firebase/firestore";
 import { db } from "../../firebase"
-import { useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 
@@ -38,6 +38,7 @@ const steps = [
 // Main
 const Setting = () => {
     const [activeStep, setActiveStep] = useState(0);
+    const [targetData, setTargetData] = useState({});
     const {currentUser} = useContext(AuthContext)
     const user = currentUser;
     const userUID = user ? user.uid : null; 
@@ -55,6 +56,23 @@ const Setting = () => {
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
+
+    // Get the target field of user
+    useEffect(() => {
+        const userRef = collection(db, "users");
+        const userDoc = doc(userRef, userUID);
+        const unsub = onSnapshot(userDoc, (doc) => {
+            if (doc.exists()) {
+                setTargetData(doc.data().target);
+            }
+        }, (error) => {
+            console.log(error);
+        });
+    
+        return () => {
+            unsub();
+        };
+    }, []);
     
     // Set new riskLevelID
     const handleChange = async (event) => {
@@ -98,11 +116,17 @@ const Setting = () => {
         }
     };
 
-    
-
     return (
         <div className="setting">
-            <h1 className="title">Settings</h1>
+            <h1 className="title">Settings</h1><br/>
+            <h3>Current Settings</h3><br/>
+            <p><b>Gender:</b> </p>
+            <p><b>Risk Level:</b> </p><br/>
+            <h3>Current Target Values</h3><br/>
+            <p><b>Cholesterol:</b> {targetData.cholesterol}</p>
+            <p><b>LDL-Cholesterol:</b> {targetData.ldl}</p>
+            <p><b>HDL-Cholesterol:</b> {targetData.hdl}</p>
+            <p><b>Triglycerides:</b> {targetData.triglycerides}</p><br/>
             <Stepper activeStep={activeStep} orientation="vertical">
             {steps.map((step, index) => (
             <Step key={step.label}>
