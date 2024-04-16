@@ -39,6 +39,8 @@ const steps = [
 const Setting = () => {
     const [activeStep, setActiveStep] = useState(0);
     const [targetData, setTargetData] = useState({});
+    const [genderData, setGendertData] = useState();
+    const [risklevelData, setRisklevelData] = useState();
     const {currentUser} = useContext(AuthContext)
     const user = currentUser;
     const userUID = user ? user.uid : null; 
@@ -57,13 +59,15 @@ const Setting = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    // Get the target field of user
+    // Get the target field, gender and risk level of user
     useEffect(() => {
         const userRef = collection(db, "users");
         const userDoc = doc(userRef, userUID);
         const unsub = onSnapshot(userDoc, (doc) => {
             if (doc.exists()) {
                 setTargetData(doc.data().target);
+                setGendertData(doc.data().gender);
+                setRisklevelData(doc.data().riskLevel);
             }
         }, (error) => {
             console.log(error);
@@ -120,8 +124,8 @@ const Setting = () => {
         <div className="setting">
             <h1 className="title">Settings</h1><br/>
             <h3>Current Settings</h3><br/>
-            <p><b>Gender:</b> </p>
-            <p><b>Risk Level:</b> </p><br/>
+            <p><b>Gender:</b> {genderData}</p>
+            <p><b>Risk Level:</b> {risklevelData}</p><br/>
             <h3>Current Target Values</h3><br/>
             <p><b>Cholesterol:</b> {targetData.cholesterol}</p>
             <p><b>LDL-Cholesterol:</b> {targetData.ldl}</p>
