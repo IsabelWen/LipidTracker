@@ -15,9 +15,14 @@ import { useNavigate } from "react-router-dom";
 // Import components
 import Genderradio from "../genderradio/genderradio";
 import Riskselect from "../riskselect/riskselect";
+import { reload } from "firebase/auth";
 
 // Steps
 const steps = [
+    {
+        label: 'Update your settings',
+        description: `Click continue to update your settings.`
+    },
     {
         label: 'Select a gender',
         description: `Gender can impact HDL cholesterol levels because women tend to have higher levels of HDL 
@@ -111,7 +116,7 @@ const Setting = () => {
             }).then(() => {
                 alert("Your target values have been updated successfully!");
                 console.log("Document successfully updated!");
-                navigate("/");
+                window.location.reload();
             }).catch((error) => {
                 console.error("Error updating document: ", error);
             });
