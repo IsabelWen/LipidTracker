@@ -43,13 +43,12 @@ const steps = [
 // Main
 const Setting = () => {
     const [activeStep, setActiveStep] = useState(0);
-    const [targetData, setTargetData] = useState({});
-    const [genderData, setGendertData] = useState();
-    const [risklevelData, setRisklevelData] = useState();
+    const [targetData, setTargetData] = useState({cholesterol: 'No data', ldl: 'No data', hdl: 'No data', triglycerides: 'No data'});
+    const [genderData, setGendertData] = useState('No data');
+    const [risklevelData, setRisklevelData] = useState('No data');
     const {currentUser} = useContext(AuthContext)
     const user = currentUser;
     const userUID = user ? user.uid : null; 
-    const navigate = useNavigate();
 
     // Stepper
     const handleNext = () => {
@@ -70,9 +69,15 @@ const Setting = () => {
         const userDoc = doc(userRef, userUID);
         const unsub = onSnapshot(userDoc, (doc) => {
             if (doc.exists()) {
-                setTargetData(doc.data().target);
-                setGendertData(doc.data().gender);
-                setRisklevelData(doc.data().riskLevel);
+                if (doc.data().target) {
+                    setTargetData(doc.data().target);
+                }
+                if (doc.data().gender) {
+                    setGendertData(doc.data().gender);
+                }
+                if (doc.data().gender) {
+                    setRisklevelData(doc.data().riskLevel);
+                }
             }
         }, (error) => {
             console.log(error);
