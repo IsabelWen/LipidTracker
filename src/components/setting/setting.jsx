@@ -6,16 +6,15 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
 import { collection, doc, updateDoc, where, getDoc, query, getDocs, onSnapshot, setData } from "firebase/firestore";
 import { db } from "../../firebase"
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
-import { useNavigate } from "react-router-dom";
 
 // Import components
 import Genderradio from "../genderradio/genderradio";
 import Riskselect from "../riskselect/riskselect";
-import { reload } from "firebase/auth";
 
 // Steps
 const steps = [
@@ -134,13 +133,86 @@ const Setting = () => {
         <div className="setting">
             <h1 className="title">Settings</h1><br/>
             <h3>Current Settings</h3><br/>
-            <p><b>Gender:</b> {genderData}</p>
-            <p><b>Risk Level:</b> {risklevelData}</p><br/>
+            <div className="personalinfo">
+                <p><b>Gender:</b> {genderData}</p>
+                <p><b>Risk Level:</b> {risklevelData}</p><br/>
+            </div>
             <h3>Current Target Values</h3><br/>
-            <p><b>Cholesterol:</b> {targetData.cholesterol}</p>
-            <p><b>LDL-Cholesterol:</b> {targetData.ldl}</p>
-            <p><b>HDL-Cholesterol:</b> {targetData.hdl}</p>
-            <p><b>Triglycerides:</b> {targetData.triglycerides}</p><br/>
+            <div className="targets">
+                <Box
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    '& > :not(style)': {
+                    m: 1, width: 128, height: 128,
+                    '@media (max-width: 780px)': {
+                        width: 200,},
+                    '@media (max-width: 511px)': {
+                        width: 128,},
+                    },
+                }}
+                >
+                    <Paper className='targetinfo' elevation={3} style={{backgroundColor: '#619ED6', borderRadius: '15px'}}>
+                        <p><b>Cholesterol:</b></p>
+                        <h1>{targetData.cholesterol}</h1>
+                    </Paper>
+                </Box>
+                <Box
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    '& > :not(style)': {
+                    m: 1, width: 128, height: 128,
+                    '@media (max-width: 780px)': {
+                        width: 200,},
+                    '@media (max-width: 511px)': {
+                        width: 128,},
+                    },
+                }}
+                >
+                    <Paper className='targetinfo' elevation={3} style={{backgroundColor: '#E48F1B', borderRadius: '15px'}}>
+                        <p><b>LDL:</b></p>
+                        <h1>{targetData.ldl}</h1>
+                    </Paper>
+                </Box>
+                <Box
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    '& > :not(style)': {
+                    m: 1, width: 128, height: 128,
+                    '@media (max-width: 780px)': {
+                        width: 200,},
+                    '@media (max-width: 511px)': {
+                        width: 128,},
+                    },
+                }}
+                >
+                    <Paper className='targetinfo' elevation={3} style={{backgroundColor: '#689b5b', borderRadius: '15px'}}>
+                        <p><b>HDL:</b></p>
+                        <h1>{targetData.hdl}</h1>
+                    </Paper>
+                </Box>
+                <Box
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    '& > :not(style)': {
+                    m: 1, width: 128, height: 128,
+                    '@media (max-width: 780px)': {
+                        width: 200,},
+                    '@media (max-width: 511px)': {
+                        width: 128,},
+                    },
+                }}
+                >
+                    <Paper className='targetinfo' elevation={3} style={{backgroundColor: '#E64345', borderRadius: '15px'}}>
+                    <p><b>Triglycerides:</b></p>
+                        <h1>{targetData.triglycerides}</h1>
+                    </Paper>
+                </Box>
+            </div>
+            
             <Stepper activeStep={activeStep} orientation="vertical">
             {steps.map((step, index) => (
             <Step key={step.label}>

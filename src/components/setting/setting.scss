@@ -9,7 +9,35 @@
         margin-top: 30px;
         margin-bottom: 10px;
     }
-    
+
+    .personalinfo {
+        display: flex;
+        flex-direction: row;
+        padding: 15px;
+    }
+
+    .targets {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+
+        .targetinfo {
+            p {
+                color: #fff;
+                padding: 10px;
+            }
+            h1 {
+                color: #fff;
+                margin-left: 25%;
+                margin-top: 10%;
+            }
+            
+        }
+        @media (max-width: 515px) {
+            justify-content: center;
+        }
+    }
 
     .MuiStepIcon-root.Mui-active {
         color: #00796b;
