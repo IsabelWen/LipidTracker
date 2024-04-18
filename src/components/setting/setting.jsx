@@ -7,6 +7,13 @@ import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
+import Modal from '@mui/material/Modal';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Tooltip from '@mui/material/Tooltip';
 import { collection, doc, updateDoc, where, getDoc, query, getDocs, onSnapshot, setData } from "firebase/firestore";
 import { db } from "../../firebase"
 import { useEffect, useState, useContext } from "react";
@@ -61,6 +68,11 @@ const Setting = () => {
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
+
+    // Modal
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     // Get the target field, gender and risk level of user
     useEffect(() => {
@@ -132,11 +144,59 @@ const Setting = () => {
     return (
         <div className="setting">
             <h1 className="title">Settings</h1><br/>
+
             <h3>Current Settings</h3><br/>
             <div className="personalinfo">
-                <p><b>Gender:</b> {genderData}</p>
-                <p><b>Risk Level:</b> {risklevelData}</p><br/>
+                <div style={{cursor: 'pointer'}} className="info" onClick={handleOpen}>
+                    <p><b>Gender:</b></p><p style={{color: '#00796b'}}>{genderData}</p>
+                </div>
+                <Modal open={open} onClose={handleClose}>
+                    <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 320,
+                    maxWidth: '90%',
+                    bgcolor: 'background.paper',
+                    border: 'none',
+                    boxShadow: 24,
+                    p: 4,
+                    }}>
+                        <h2 style={{padding: '5px'}}>Gender-Based HDL Targets</h2>
+                        <p style={{padding: '5px'}}><i>Further Explanation in FAQ</i></p>
+                        <Table aria-label="gender-based HDL targets table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell><b>Gender</b></TableCell>
+                                    <TableCell align="right"><b>HDL target&nbsp;(mg/dL)</b></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell component="th" scope="row">Female</TableCell >
+                                    <TableCell align="right">50</TableCell >
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell >Male</TableCell >
+                                    <TableCell align="right">40</TableCell >
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell >Other</TableCell >
+                                    <TableCell align="right">45</TableCell >
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </Box>
+                </Modal>
+                
+                <Tooltip placement="bottom" title="Explore the FAQ section for risk level insights." arrow>
+                    <div className="info">
+                        <p><b>Risk Level:</b></p><p style={{color: '#00796b'}}>{risklevelData}</p>
+                    </div>
+                </Tooltip>
             </div>
+
             <h3>Current Target Values</h3><br/>
             <div className="targets">
                 <Box
