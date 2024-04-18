@@ -9,7 +9,46 @@
         margin-top: 30px;
         margin-bottom: 10px;
     }
-    
+
+    .personalinfo {
+        margin-bottom: 30px;
+
+        .info {
+            background-color: #e3e3e3;
+            border-radius: 15px;
+            display: flex;
+            padding: 15px 25px;
+            max-width: 250px;
+            margin-bottom: 10px;
+            justify-content: space-between;
+            p {
+                font-size: 18px;
+            }
+        }
+    }
+
+    .targets {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+
+        .targetinfo {
+            p {
+                color: #fff;
+                padding: 10px;
+            }
+            h1 {
+                color: #fff;
+                margin-left: 25%;
+                margin-top: 10%;
+            }
+            
+        }
+        @media (max-width: 515px) {
+            justify-content: center;
+        }
+    }
 
     .MuiStepIcon-root.Mui-active {
         color: #00796b;

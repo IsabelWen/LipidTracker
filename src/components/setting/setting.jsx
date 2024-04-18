@@ -6,11 +6,18 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
-import { collection, doc, updateDoc, where, getDoc, query, getDocs } from "firebase/firestore";
+import Paper from '@mui/material/Paper';
+import Modal from '@mui/material/Modal';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Tooltip from '@mui/material/Tooltip';
+import { collection, doc, updateDoc, where, getDoc, query, getDocs, onSnapshot, setData } from "firebase/firestore";
 import { db } from "../../firebase"
-import { useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
-import { useNavigate } from "react-router-dom";
 
 // Import components
 import Genderradio from "../genderradio/genderradio";
@@ -18,6 +25,10 @@ import Riskselect from "../riskselect/riskselect";
 
 // Steps
 const steps = [
+    {
+        label: 'Update your settings',
+        description: `Click continue to update your settings.`
+    },
     {
         label: 'Select a gender',
         description: `Gender can impact HDL cholesterol levels because women tend to have higher levels of HDL 
@@ -38,10 +49,12 @@ const steps = [
 // Main
 const Setting = () => {
     const [activeStep, setActiveStep] = useState(0);
+    const [targetData, setTargetData] = useState({cholesterol: 'No data', ldl: 'No data', hdl: 'No data', triglycerides: 'No data'});
+    const [genderData, setGendertData] = useState('No data');
+    const [risklevelData, setRisklevelData] = useState('No data');
     const {currentUser} = useContext(AuthContext)
     const user = currentUser;
     const userUID = user ? user.uid : null; 
-    const navigate = useNavigate();
 
     // Stepper
     const handleNext = () => {
@@ -55,6 +68,36 @@ const Setting = () => {
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
+
+    // Modal
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    // Get the target field, gender and risk level of user
+    useEffect(() => {
+        const userRef = collection(db, "users");
+        const userDoc = doc(userRef, userUID);
+        const unsub = onSnapshot(userDoc, (doc) => {
+            if (doc.exists()) {
+                if (doc.data().target) {
+                    setTargetData(doc.data().target);
+                }
+                if (doc.data().gender) {
+                    setGendertData(doc.data().gender);
+                }
+                if (doc.data().gender) {
+                    setRisklevelData(doc.data().riskLevel);
+                }
+            }
+        }, (error) => {
+            console.log(error);
+        });
+    
+        return () => {
+            unsub();
+        };
+    }, []);
     
     // Set new riskLevelID
     const handleChange = async (event) => {
@@ -89,7 +132,7 @@ const Setting = () => {
             }).then(() => {
                 alert("Your target values have been updated successfully!");
                 console.log("Document successfully updated!");
-                navigate("/");
+                window.location.reload();
             }).catch((error) => {
                 console.error("Error updating document: ", error);
             });
@@ -98,11 +141,138 @@ const Setting = () => {
         }
     };
 
-    
-
     return (
         <div className="setting">
-            <h1 className="title">Settings</h1>
+            <h1 className="title">Settings</h1><br/>
+
+            <h3>Current Settings</h3><br/>
+            <div className="personalinfo">
+                <div style={{cursor: 'pointer'}} className="info" onClick={handleOpen}>
+                    <p><b>Gender:</b></p><p style={{color: '#00796b'}}>{genderData}</p>
+                </div>
+                <Modal open={open} onClose={handleClose}>
+                    <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 320,
+                    maxWidth: '90%',
+                    bgcolor: 'background.paper',
+                    border: 'none',
+                    boxShadow: 24,
+                    p: 4,
+                    }}>
+                        <h2 style={{padding: '5px'}}>Gender-Based HDL Targets</h2>
+                        <p style={{padding: '5px'}}><i>Further Explanation in FAQ</i></p>
+                        <Table aria-label="gender-based HDL targets table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell><b>Gender</b></TableCell>
+                                    <TableCell align="right"><b>HDL target&nbsp;(mg/dL)</b></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell component="th" scope="row">Female</TableCell >
+                                    <TableCell align="right">50</TableCell >
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell >Male</TableCell >
+                                    <TableCell align="right">40</TableCell >
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell >Other</TableCell >
+                                    <TableCell align="right">45</TableCell >
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </Box>
+                </Modal>
+                
+                <Tooltip placement="bottom" title="Explore the FAQ section for risk level insights." arrow>
+                    <div className="info">
+                        <p><b>Risk Level:</b></p><p style={{color: '#00796b'}}>{risklevelData}</p>
+                    </div>
+                </Tooltip>
+            </div>
+
+            <h3>Current Target Values</h3><br/>
+            <div className="targets">
+                <Box
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    '& > :not(style)': {
+                    m: 1, width: 128, height: 128,
+                    '@media (max-width: 780px)': {
+                        width: 200,},
+                    '@media (max-width: 511px)': {
+                        width: 128,},
+                    },
+                }}
+                >
+                    <Paper className='targetinfo' elevation={3} style={{backgroundColor: '#619ED6', borderRadius: '15px'}}>
+                        <p><b>Cholesterol:</b></p>
+                        <h1>{targetData.cholesterol}</h1>
+                    </Paper>
+                </Box>
+                <Box
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    '& > :not(style)': {
+                    m: 1, width: 128, height: 128,
+                    '@media (max-width: 780px)': {
+                        width: 200,},
+                    '@media (max-width: 511px)': {
+                        width: 128,},
+                    },
+                }}
+                >
+                    <Paper className='targetinfo' elevation={3} style={{backgroundColor: '#E48F1B', borderRadius: '15px'}}>
+                        <p><b>LDL:</b></p>
+                        <h1>{targetData.ldl}</h1>
+                    </Paper>
+                </Box>
+                <Box
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    '& > :not(style)': {
+                    m: 1, width: 128, height: 128,
+                    '@media (max-width: 780px)': {
+                        width: 200,},
+                    '@media (max-width: 511px)': {
+                        width: 128,},
+                    },
+                }}
+                >
+                    <Paper className='targetinfo' elevation={3} style={{backgroundColor: '#689b5b', borderRadius: '15px'}}>
+                        <p><b>HDL:</b></p>
+                        <h1>{targetData.hdl}</h1>
+                    </Paper>
+                </Box>
+                <Box
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    '& > :not(style)': {
+                    m: 1, width: 128, height: 128,
+                    '@media (max-width: 780px)': {
+                        width: 200,},
+                    '@media (max-width: 511px)': {
+                        width: 128,},
+                    },
+                }}
+                >
+                    <Paper className='targetinfo' elevation={3} style={{backgroundColor: '#E64345', borderRadius: '15px'}}>
+                    <p><b>Triglycerides:</b></p>
+                        <h1>{targetData.triglycerides}</h1>
+                    </Paper>
+                </Box>
+            </div>
+            
             <Stepper activeStep={activeStep} orientation="vertical">
             {steps.map((step, index) => (
             <Step key={step.label}>
