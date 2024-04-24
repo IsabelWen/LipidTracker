@@ -30,7 +30,7 @@
       }
     }
   
-    .cellDelete {
+    .cellButtons {
       display: flex;
       align-items: center;
       gap: 15px;
@@ -45,6 +45,20 @@
 
         &:hover {
             background-color: rgb(170, 12, 12);
+            color: #fff;
+        }
+      }
+
+      .updateButton {
+        padding: 2px 5px;
+        border-radius: 5px;
+        color: rgb(43, 125, 13);
+        border: 1px solid rgba(43, 125, 13, 0.8);
+        cursor: pointer;
+        transition: background-color 0.4s ease-out;
+
+        &:hover {
+            background-color: rgb(43, 125, 13);
             color: #fff;
         }
       }

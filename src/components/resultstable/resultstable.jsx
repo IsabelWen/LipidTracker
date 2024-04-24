@@ -42,20 +42,36 @@ const Resultstable = () => {
     }
   };
 
-  const deleteColumn = [
+  // Function to handle Update test results
+  const handleUpdate = async (id) => {
+    try{
+      await deleteDoc(doc(db, "results", id));
+      setData(data.filter((item) => item.id !== id));
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  const buttonsColumn = [
     {
-      field: "delete",
-      headerName: "Delete Test",
-      width: 120,
+      field: "buttons",
+      headerName: "Actions",
+      width: 140,
       sortable: false,
       renderCell: (params) => {
         return (
-          <div className="cellDelete">
+          <div className="cellButtons">
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
             >
               Delete
+            </div>
+            <div
+              className="updateButton"
+              onClick={() => handleUpdate(params.row.id)}
+            >
+              Update
             </div>
           </div>
         );
@@ -74,7 +90,7 @@ const Resultstable = () => {
         <DataGrid
             className="datagrid"
             rows={data}
-            columns={resultsColumns.concat(deleteColumn)}
+            columns={resultsColumns.concat(buttonsColumn)}
             pageSize={10}
             disableColumnMenu 
             initialState={{
