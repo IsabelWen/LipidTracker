@@ -1,4 +1,5 @@
 import "./resultstable.scss";
+import Update from "../update/update";
 import { resultsColumns } from "../../tableSource";
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from "react-router-dom";
@@ -6,9 +7,11 @@ import { useEffect, useState, useContext } from "react";
 import { collection, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../firebase"
 import { AuthContext } from "../../context/authContext";
+import Dialog from '@mui/material/Dialog';
 
 const Resultstable = () => {
   const [data, setData] = useState([]);
+  const [open, setOpen] = useState(false);
   const {currentUser} = useContext(AuthContext)
   const user = currentUser;
   const userUID = user.uid;
@@ -42,15 +45,14 @@ const Resultstable = () => {
     }
   };
 
-  // Function to handle Update test results
+  // Function to handle open update dialog
   const handleUpdate = async (id) => {
-    try{
-      await deleteDoc(doc(db, "results", id));
-      setData(data.filter((item) => item.id !== id));
-    }catch(err){
-      console.log(err);
-    }
+    setOpen(true);
   }
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const buttonsColumn = [
     {
@@ -99,6 +101,9 @@ const Resultstable = () => {
                 },
             }}
         />
+        <Dialog open={open} onClose={handleClose}>
+          <Update></Update>
+        </Dialog>
     </div>
   );
 };

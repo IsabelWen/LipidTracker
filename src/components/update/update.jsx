@@ -1,9 +1,6 @@
 // Import scss
 import "./update.scss";
 
-// Import components
-import Sidebar from "../../components/sidebar/sidebar";
-
 // Imports
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -45,16 +42,8 @@ const Update = ({ inputs }) => {
         }
     };
 
-    return (
-        <div className="new">
-            <Sidebar className="sidebar"/>
-            <div className="newContainer">
-                <div className="top">
-                    <div className="title">Add New Test Result</div>
-                </div>
-                <div className="bottom">
-                    <div className="buttomContainer">
-                        <form onSubmit={handleAdd}>
+    /**
+     * <form onSubmit={handleAdd}>
                             {inputs.map((input) => (
                                 <div className="formInput" key={input.id}>
                                     <label>
@@ -74,6 +63,17 @@ const Update = ({ inputs }) => {
                             ))}
                             <button type="submit">Add</button>
                         </form>
+     */
+
+    return (
+        <div className="new">
+            <div className="newContainer">
+                <div className="top">
+                    <div className="title">Add New Test Result</div>
+                </div>
+                <div className="bottom">
+                    <div className="buttomContainer">
+                        
                     </div>
                 </div>
             </div>
