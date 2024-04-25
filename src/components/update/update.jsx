@@ -67,8 +67,9 @@ const Update = ({ id, handleClose }) => {
     return (
         <div className="new">
             <div className="newContainer">
-                <div className="top">
-                    <div className="title">Update Test Result</div>
+                <div className="top" style={{display: "flex",justifyContent: "space-between"}}>
+                    <div className="title">Update Test Result </div>
+                    <button className="closeButton" onClick={handleClose}>X</button>
                 </div>
                 <div className="bottom">
                     <div className="buttomContainer">
