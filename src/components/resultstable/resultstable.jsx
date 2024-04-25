@@ -12,6 +12,7 @@ import Dialog from '@mui/material/Dialog';
 const Resultstable = () => {
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
   const {currentUser} = useContext(AuthContext)
   const user = currentUser;
   const userUID = user.uid;
@@ -47,6 +48,7 @@ const Resultstable = () => {
 
   // Function to handle open update dialog
   const handleUpdate = async (id) => {
+    setSelectedId(id);
     setOpen(true);
   }
 
@@ -101,8 +103,8 @@ const Resultstable = () => {
                 },
             }}
         />
-        <Dialog open={open} onClose={handleClose}>
-          <Update></Update>
+        <Dialog open={open} onClose={handleClose} fullWidth={true}>
+          <Update id={selectedId}></Update>
         </Dialog>
     </div>
   );
