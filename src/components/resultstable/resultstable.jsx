@@ -1,4 +1,5 @@
 import "./resultstable.scss";
+import Update from "../update/update";
 import { resultsColumns } from "../../tableSource";
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from "react-router-dom";
@@ -6,9 +7,12 @@ import { useEffect, useState, useContext } from "react";
 import { collection, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../firebase"
 import { AuthContext } from "../../context/authContext";
+import Dialog from '@mui/material/Dialog';
 
 const Resultstable = () => {
   const [data, setData] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
   const {currentUser} = useContext(AuthContext)
   const user = currentUser;
   const userUID = user.uid;
@@ -42,20 +46,36 @@ const Resultstable = () => {
     }
   };
 
-  const deleteColumn = [
+  // Function to handle open update dialog
+  const handleUpdate = async (id) => {
+    setSelectedId(id);
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const buttonsColumn = [
     {
-      field: "delete",
-      headerName: "Delete Test",
-      width: 120,
+      field: "buttons",
+      headerName: "Actions",
+      width: 140,
       sortable: false,
       renderCell: (params) => {
         return (
-          <div className="cellDelete">
+          <div className="cellButtons">
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
             >
               Delete
+            </div>
+            <div
+              className="updateButton"
+              onClick={() => handleUpdate(params.row.id)}
+            >
+              Update
             </div>
           </div>
         );
@@ -74,7 +94,7 @@ const Resultstable = () => {
         <DataGrid
             className="datagrid"
             rows={data}
-            columns={resultsColumns.concat(deleteColumn)}
+            columns={resultsColumns.concat(buttonsColumn)}
             pageSize={10}
             disableColumnMenu 
             initialState={{
@@ -83,6 +103,9 @@ const Resultstable = () => {
                 },
             }}
         />
+        <Dialog open={open} onClose={handleClose} fullWidth={true}>
+          <Update id={selectedId} handleClose={handleClose}></Update>
+        </Dialog>
     </div>
   );
 };
