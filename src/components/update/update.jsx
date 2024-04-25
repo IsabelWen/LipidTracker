@@ -44,6 +44,14 @@ const Update = ({ id, handleClose }) => {
             });
         }
     }, [data]);
+
+    // Handle form input
+    const handleInput = (e) => {
+        const id = e.target.id;
+        const value = e.target.value;
+    
+        setData({ ...data, [id]: value });
+    };
     
     // Handle results updates
     const handleUpdate = async (e) => {
@@ -91,6 +99,7 @@ const Update = ({ id, handleClose }) => {
                                     maxLength={input.maxLength}
                                     step={input.step}
                                     required={input.required}
+                                    onChange={handleInput}
                                     />
                                 </div>
                             ))}
