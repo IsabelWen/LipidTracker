@@ -34,13 +34,16 @@ const Update = ({ id, handleClose }) => {
         }
     }, [id]);
   
-    // Handle form input
-    const handleInput = (e) => {
-        const id = e.target.id;
-        const value = e.target.value;
-    
-        setData({ ...data, [id]: value });
-    };
+    // Provide current values as default values
+    useEffect(() => {
+        if (data) {
+            resultsInputs.forEach((input) => {
+                if (data[input.id]) {
+                    document.getElementById(input.id).value = data[input.id];
+                }
+            });
+        }
+    }, [data]);
     
     // Handle results updates
     const handleUpdate = async (e) => {
@@ -81,14 +84,14 @@ const Update = ({ id, handleClose }) => {
                                         <small>{input.unitLabel}</small>
                                     </label>
                                     <input id={input.id} 
-                                    type={input.type} 
+                                    type={input.type}
                                     placeholder={input.placeholder} 
                                     min={input.min}
                                     max={input.max}
                                     maxLength={input.maxLength}
                                     step={input.step}
                                     required={input.required}
-                                    onChange={handleInput}/>
+                                    />
                                 </div>
                             ))}
                             <button type="submit">Update</button>
