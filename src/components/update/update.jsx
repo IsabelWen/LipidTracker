@@ -3,15 +3,13 @@ import "./update.scss";
 
 // Imports
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { onSnapshot, doc, updateDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import { resultsInputs } from "../../formSource";
 
 // Main
-const Update = ({ id }) => {
+const Update = ({ id, handleClose }) => {
     const [data, setData] = useState("");
-    const navigate = useNavigate();
     const user = auth.currentUser;
     const userUID = user ? user.uid : null; 
     
@@ -60,12 +58,11 @@ const Update = ({ id }) => {
     
         try {
             await updateDoc(doc(db, "results", id), formData);
-            navigate(-1);
+            handleClose();
         } catch (err) {
             console.log(err);
         }
     };
-
 
     return (
         <div className="new">

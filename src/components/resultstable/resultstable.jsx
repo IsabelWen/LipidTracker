@@ -104,7 +104,7 @@ const Resultstable = () => {
             }}
         />
         <Dialog open={open} onClose={handleClose} fullWidth={true}>
-          <Update id={selectedId}></Update>
+          <Update id={selectedId} handleClose={handleClose}></Update>
         </Dialog>
     </div>
   );
