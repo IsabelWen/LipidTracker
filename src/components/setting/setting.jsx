@@ -148,7 +148,7 @@ const Setting = () => {
             <h3>Current Settings</h3><br/>
             <div className="personalinfo">
                 <div style={{cursor: 'pointer'}} className="info" onClick={handleOpen}>
-                    <p><b>Gender:</b></p><p style={{color: '#00796b'}}>{genderData}</p>
+                    <p><b>Gender:</b></p><p style={{color: '#00796b', textTransform: 'capitalize'}}>{genderData}</p>
                 </div>
                 <Modal open={open} onClose={handleClose}>
                     <Box sx={{
