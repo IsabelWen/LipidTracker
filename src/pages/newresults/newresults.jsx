@@ -3,6 +3,7 @@ import "./newresults.scss";
 
 // Import components
 import Sidebar from "../../components/sidebar/sidebar";
+import Footer from "../../components/footer/footer";
 
 // Imports
 import { useState } from "react";
@@ -46,6 +47,7 @@ const Newresults = ({ inputs }) => {
     };
 
     return (
+        <>
         <div className="new">
             <Sidebar className="sidebar"/>
             <div className="newContainer">
@@ -78,6 +80,8 @@ const Newresults = ({ inputs }) => {
                 </div>
             </div>
         </div>
+        <Footer></Footer>
+        </>
     );
 };
 
