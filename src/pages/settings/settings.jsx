@@ -16,7 +16,9 @@ const Settings = () => {
                     <Setting/>
                 </div>
             </div>
+            <div className="footerContainer">
             <Footer></Footer>
+            </div>
         </>
     );
 };
