@@ -96,7 +96,8 @@ const Sidebar = () => {
                         </li>
                     </Link>
                 </ul>
-                <a href={Impressum} rel="noreferrer" target="_blank">Impressum</a>
+                <br/>
+                <a className="impressum" href={Impressum} rel="noreferrer" target="_blank">Impressum</a>
             </div>
         </div>
         </>
