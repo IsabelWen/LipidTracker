@@ -12,6 +12,7 @@ import { db, auth } from "../../firebase";
 import { setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
+import Impressum from "../../files/Impressum.pdf";
 
 // Main
 const Login = () => {
@@ -99,6 +100,7 @@ const Login = () => {
                     </form>
                 </TabPanel>
             </TabContext>
+            <a className="impressum" href={Impressum} rel="noreferrer" target="_blank">Impressum</a>
         </div>
     );
 };
