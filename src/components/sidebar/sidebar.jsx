@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { getAuth, signOut } from "firebase/auth";
+import Impressum from "../../files/Impressum.pdf";
 
 // Import Icons
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -95,6 +96,7 @@ const Sidebar = () => {
                         </li>
                     </Link>
                 </ul>
+                <a href={Impressum} rel="noreferrer" target="_blank">Impressum</a>
             </div>
         </div>
         </>

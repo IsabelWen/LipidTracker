@@ -1,6 +1,5 @@
 // Import scss & component
 import "./login.scss"
-import Footer from "../../components/footer/footer";
 
 // MUI imports
 import { Box, Tab } from '@mui/material';
@@ -74,36 +73,33 @@ const Login = () => {
     };
 
     return (
-        <>
-            <div className="login">
-                <h1>LipidTracker</h1><br/><br/>
-                <TabContext value={value}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <TabList onChange={handleChange} aria-label="API tabs">
-                            <Tab label="Login" value="1" />
-                            <Tab label="Sign up" value="2" />
-                        </TabList>
-                    </Box>
-                    <TabPanel value="1">
-                        <form onSubmit={handleLogin}>
-                            <input type="email" placeholder="Email" onChange={e=>setEmail(e.target.value)}/>
-                            <input type="password" placeholder="Password" onChange={e=>setPassword(e.target.value)}/>
-                            <button type="submit">Login</button>
-                            {error && <span>Wrong email or password!</span>}
-                        </form>
-                    </TabPanel>
-                    <TabPanel value="2">
-                        <form onSubmit={handleSignup}>
-                            <input type="email" placeholder="Email" onChange={e=>setEmail(e.target.value)}/>
-                            <input type="password" placeholder="Password" onChange={e=>setPassword(e.target.value)}/>
-                            <button type="submit">Sign up</button>
-                            {error && <span>Something went wrong!</span>}
-                        </form>
-                    </TabPanel>
-                </TabContext>
-            </div>
-            <Footer></Footer>
-        </>
+        <div className="login">
+            <h1>LipidTracker</h1><br /><br />
+            <TabContext value={value}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <TabList onChange={handleChange} aria-label="API tabs">
+                        <Tab label="Login" value="1" />
+                        <Tab label="Sign up" value="2" />
+                    </TabList>
+                </Box>
+                <TabPanel value="1">
+                    <form onSubmit={handleLogin}>
+                        <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
+                        <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+                        <button type="submit">Login</button>
+                        {error && <span>Wrong email or password!</span>}
+                    </form>
+                </TabPanel>
+                <TabPanel value="2">
+                    <form onSubmit={handleSignup}>
+                        <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
+                        <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+                        <button type="submit">Sign up</button>
+                        {error && <span>Something went wrong!</span>}
+                    </form>
+                </TabPanel>
+            </TabContext>
+        </div>
     );
 };
 
