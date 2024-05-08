@@ -46,15 +46,17 @@ const Resultstable = () => {
 
   // Function to handle open delete confirmation modal
   const handleConfirmation = async (id) => {
+    console.log(id);
     setSelectedId(id);
     setConfirm(true);
   }
 
   // Function to Delete test results
-  const handleDelete = async (id) => {
+  const handleDelete = async () => {
     try{
-      await deleteDoc(doc(db, "results", id));
-      setData(data.filter((item) => item.id !== id));
+      console.log(selectedId);
+      await deleteDoc(doc(db, "results", selectedId));
+      setData(data.filter((item) => item.id !== selectedId));
       setConfirm(false);
     }catch(err){
       console.log(err);
