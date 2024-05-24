@@ -4,6 +4,7 @@ import "./login.scss"
 // MUI imports
 import { Box, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
+import Tooltip from '@mui/material/Tooltip';
 
 // Imports
 import { useContext, useState } from "react";
@@ -85,7 +86,9 @@ const Login = () => {
                 </Box>
                 <TabPanel value="1">
                     <form onSubmit={handleLogin}>
-                        <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
+                        <Tooltip placement="bottom" title="Note: This can be a fake email address. No validation email will be sent." arrow>
+                            <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
+                        </Tooltip>
                         <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
                         <button type="submit">Login</button>
                         {error && <span>Wrong email or password!</span>}
@@ -93,7 +96,9 @@ const Login = () => {
                 </TabPanel>
                 <TabPanel value="2">
                     <form onSubmit={handleSignup}>
-                        <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
+                        <Tooltip placement="bottom" title="Note: This can be a fake email address. No validation email will be sent." arrow>
+                            <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
+                        </Tooltip>
                         <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
                         <button type="submit">Sign up</button>
                         {error && <span>Something went wrong!</span>}
