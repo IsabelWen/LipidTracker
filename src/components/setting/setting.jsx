@@ -150,6 +150,8 @@ const Setting = () => {
                 <div style={{cursor: 'pointer'}} className="info" onClick={handleOpen}>
                     <p><b>Gender:</b></p><p style={{color: '#00796b', textTransform: 'capitalize'}}>{genderData}</p>
                 </div>
+
+                {/* Modal start; shows a table with HDL targets according to gender */}
                 <Modal open={open} onClose={handleClose}>
                     <Box sx={{
                     position: 'absolute',
@@ -189,6 +191,7 @@ const Setting = () => {
                         </Table>
                     </Box>
                 </Modal>
+                {/* Modal end */}
                 
                 <Tooltip placement="bottom" title="Explore the FAQ section for risk level insights." arrow>
                     <div className="info">
