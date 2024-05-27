@@ -5,6 +5,8 @@ import "./login.scss"
 import { Box, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import Tooltip from '@mui/material/Tooltip';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 // Imports
 import { useContext, useState } from "react";
@@ -100,6 +102,28 @@ const Login = () => {
                             <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
                         </Tooltip>
                         <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+                        <FormControlLabel 
+                            control={<Checkbox 
+                                sx={{
+                                '&.Mui-checked': {
+                                  color: '#00796b',
+                                },
+                              }}
+                            />}
+                            label={
+                                <p>I have read and agree to the website's&nbsp;
+                                <a style={{color: "red", fontWeight: "bold"}} 
+                                href="http://placekitten.com/200/300" rel="noopener noreferrer" target="_blank">
+                                privacy policy</a>.*</p>
+                            }
+                            sx={{
+                                maxWidth: "200px",
+                                paddingBottom: "10px",
+                                '&.MuiTypography-root': {
+                                    fontSize: "12px",
+                                  }
+                            }}
+                        />
                         <button type="submit">Sign up</button>
                         {error && <span>Something went wrong!</span>}
                     </form>
