@@ -86,9 +86,7 @@ const Login = () => {
                 </Box>
                 <TabPanel value="1">
                     <form onSubmit={handleLogin}>
-                        <Tooltip placement="bottom" title="Note: This can be a fake email address. No validation email will be sent." arrow>
-                            <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
-                        </Tooltip>
+                        <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
                         <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
                         <button type="submit">Login</button>
                         {error && <span>Wrong email or password!</span>}
