@@ -16,6 +16,7 @@ import { setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import Impressum from "../../files/Impressum.pdf";
+import Datenschutzerklärung from "../../files/Datenschutzerklärung.pdf";
 
 // Main
 const Login = () => {
@@ -111,7 +112,7 @@ const Login = () => {
                             label={
                                 <p>I have read and agree to the website's&nbsp;
                                 <a style={{color: "red", fontWeight: "bold"}} 
-                                href="http://placekitten.com/200/300" rel="noopener noreferrer" target="_blank">
+                                href={Datenschutzerklärung} rel="noopener noreferrer" target="_blank">
                                 privacy policy</a>.*</p>
                             }
                             sx={{
