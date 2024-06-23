@@ -5,6 +5,8 @@ import "./login.scss"
 import { Box, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import Tooltip from '@mui/material/Tooltip';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 // Imports
 import { useContext, useState } from "react";
@@ -14,11 +16,13 @@ import { setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import Impressum from "../../files/Impressum.pdf";
+import Datenschutzerklärung from "../../files/Datenschutzerklärung.pdf";
 
 // Main
 const Login = () => {
     const [error, setError] = useState(false);
     const [email, setEmail] = useState("");
+    const [agreement, setAgreement] = useState(false);
     const [password, setPassword] = useState("");
     const [value, setValue] = useState('1'); // for tabs
   
@@ -47,12 +51,19 @@ const Login = () => {
     const handleSignup = (e) => {
         e.preventDefault();
 
-        createUserWithEmailAndPassword(auth, email, password)
+        if (agreement===false) {
+            setError(true);
+            alert("User must agree to the privacy policy.");
+            return;
+        }
+
+        createUserWithEmailAndPassword(auth, email, password, agreement)
         .then((userCredential) => {
             const user = userCredential.user;
             
             setDoc(doc(db, "users", user.uid), {
                 email: user.email,
+                agreement: agreement,
                 createdAt: new Date()
             })
             .then(() => {
@@ -98,6 +109,30 @@ const Login = () => {
                             <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
                         </Tooltip>
                         <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+                        <FormControlLabel 
+                            control={<Checkbox 
+                                sx={{
+                                '&.Mui-checked': {
+                                  color: '#00796b',
+                                },
+                              }}
+                            />}
+                            label={
+                                <p>I have read and agree to the website's&nbsp;
+                                <a style={{color: "red", fontWeight: "bold"}} 
+                                href={Datenschutzerklärung} rel="noopener noreferrer" target="_blank">
+                                privacy policy</a>.*</p>
+                            }
+                            sx={{
+                                maxWidth: "250px",
+                                paddingBottom: "10px",
+                                '&.MuiTypography-root': {
+                                    fontSize: "12px",
+                                  }
+                            }}
+                            value={agreement}
+                            onChange={(event) => setAgreement(!agreement)}
+                        />
                         <button type="submit">Sign up</button>
                         {error && <span>Something went wrong!</span>}
                     </form>
