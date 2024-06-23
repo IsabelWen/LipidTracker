@@ -22,6 +22,7 @@ import Datenschutzerklärung from "../../files/Datenschutzerklärung.pdf";
 const Login = () => {
     const [error, setError] = useState(false);
     const [email, setEmail] = useState("");
+    const [agreement, setAgreement] = useState(false);
     const [password, setPassword] = useState("");
     const [value, setValue] = useState('1'); // for tabs
   
@@ -50,12 +51,19 @@ const Login = () => {
     const handleSignup = (e) => {
         e.preventDefault();
 
-        createUserWithEmailAndPassword(auth, email, password)
+        if (agreement===false) {
+            setError(true);
+            alert("User must agree to the privacy policy.");
+            return;
+        }
+
+        createUserWithEmailAndPassword(auth, email, password, agreement)
         .then((userCredential) => {
             const user = userCredential.user;
             
             setDoc(doc(db, "users", user.uid), {
                 email: user.email,
+                agreement: agreement,
                 createdAt: new Date()
             })
             .then(() => {
@@ -122,6 +130,8 @@ const Login = () => {
                                     fontSize: "12px",
                                   }
                             }}
+                            value={agreement}
+                            onChange={(event) => setAgreement(!agreement)}
                         />
                         <button type="submit">Sign up</button>
                         {error && <span>Something went wrong!</span>}
