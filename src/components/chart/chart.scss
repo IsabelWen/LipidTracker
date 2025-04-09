@@ -17,6 +17,13 @@
             margin-top: 10px;
         }
 
+        .checkbox {
+            color: #00796b;
+        
+            &.Mui-checked {
+                color: #00796b;
+            }
+        }
     }
 
     hr {

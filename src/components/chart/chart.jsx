@@ -5,10 +5,15 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../firebase"
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 // Main
 const Chart = () => {
     const [data, setData] = useState([]);
+    const [showCholesterol, setShowCholesterol] = useState(true);
+    const [showLdl, setShowLdl] = useState(true);
+    const [showTriglycerides, setShowTriglycerides] = useState(true);
     const {currentUser} = useContext(AuthContext)
     const user = currentUser;
     const userUID = user.uid;
@@ -40,16 +45,50 @@ const Chart = () => {
     }, []);
 
     // Extracting the highest values of all
-    const highestCholesterol = Math.max(...data.map(item => item.cholesterol).filter(value => value!== undefined));
-    const highestLdl = Math.max(...data.map(item => item.ldl).filter(value => value!== undefined));
-    const highestTriglycerides = Math.max(...data.map(item => item.triglycerides));
-    const highestCholLdl = Math.max(highestLdl, highestCholesterol)
+    const highestCholesterol = showCholesterol ? Math.max(...data.map(item => item.cholesterol).filter(value => value !== undefined)) : 0;
+    const highestLdl = showLdl ? Math.max(...data.map(item => item.ldl).filter(value => value !== undefined)) : 0;
+    const highestTriglycerides = showTriglycerides ? Math.max(...data.map(item => item.triglycerides)) : 0;
+
+    // Get the highest combined value for Y-axis
+    const highestCholLdl = Math.max(highestLdl, highestCholesterol);
     const highestValue = Math.max(highestTriglycerides, highestCholLdl);
 
     return (
         <div className="chart">
             <div className="top">
                 <h1 className="title">Cholesterol Line Chart</h1>
+                <div>
+                    <FormControlLabel
+                        control={
+                        <Checkbox
+                            className="checkbox"
+                            checked={showCholesterol}
+                            onChange={() => setShowCholesterol(!showCholesterol)}
+                        />
+                        }
+                        label="Cholesterol"
+                    />
+                    <FormControlLabel
+                        control={
+                        <Checkbox
+                            className="checkbox"
+                            checked={showLdl}
+                            onChange={() => setShowLdl(!showLdl)}
+                        />
+                        }
+                        label="LDL-Cholesterol"
+                    />
+                    <FormControlLabel
+                        control={
+                        <Checkbox
+                            className="checkbox"
+                            checked={showTriglycerides}
+                            onChange={() => setShowTriglycerides(!showTriglycerides)}
+                        />
+                        }
+                        label="Triglycerides"
+                    />
+                </div>
             </div>
             <hr />
             <ResponsiveContainer width="100%" height='85%'>
@@ -69,27 +108,39 @@ const Chart = () => {
                         <YAxis type="number" domain={[0, highestValue]} stroke="gray" />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone"
-                        name="Cholesterol"
-                        connectNulls
-                        dataKey="cholesterol"
-                        stroke="#619ED6"
-                        strokeWidth="2"
-                        activeDot={{ r: 8 }} />
-                        <Line type="monotone"
-                        name="LDL-Cholesterol"
-                        connectNulls
-                        dataKey="ldl"
-                        stroke="#E48F1B"
-                        strokeWidth="2"
-                        activeDot={{ r: 8 }} />
-                        <Line type="monotone"
-                        name="Triglycerides"
-                        connectNulls
-                        dataKey="triglycerides"
-                        stroke="#E64345"
-                        strokeWidth="2"
-                        activeDot={{ r: 8 }} />
+                        {showCholesterol && (
+                            <Line
+                                type="monotone"
+                                name="Cholesterol"
+                                connectNulls
+                                dataKey="cholesterol"
+                                stroke="#619ED6"
+                                strokeWidth="2"
+                                activeDot={{ r: 8 }}
+                            />
+                        )}
+                        {showLdl && (
+                            <Line
+                                type="monotone"
+                                name="LDL-Cholesterol"
+                                connectNulls
+                                dataKey="ldl"
+                                stroke="#E48F1B"
+                                strokeWidth="2"
+                                activeDot={{ r: 8 }}
+                            />
+                        )}
+                        {showTriglycerides && (
+                            <Line
+                                type="monotone"
+                                name="Triglycerides"
+                                connectNulls
+                                dataKey="triglycerides"
+                                stroke="#E64345"
+                                strokeWidth="2"
+                                activeDot={{ r: 8 }}
+                            />
+                        )}
                         <Line
                         name="Note" 
                         dataKey="note"
