@@ -43,11 +43,4 @@ export const resultsInputs = [
       max: 10000,
       placeholder: "Triglycerides"
     },
-    {
-      id: "note",
-      label: "Note",
-      type: "text",
-      maxLength: 100,
-      placeholder: "Type in additional information, such as changes in medication or dietery."
-    },
   ];

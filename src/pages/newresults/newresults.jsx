@@ -72,6 +72,14 @@ const Newresults = ({ inputs }) => {
                                     onChange={handleInput}/>
                                 </div>
                             ))}
+                            <div className="formInput" key="note">
+                                <label>Note</label>
+                                <textarea id="note"
+                                placeholder="Type in additional information, such as changes in medication or dietery."
+                                maxLength="1000"
+                                onChange={handleInput}
+                                ></textarea>
+                            </div>
                             <button type="submit">Add</button>
                         </form>
                     </div>
