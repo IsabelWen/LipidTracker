@@ -1,0 +1,77 @@
+// Imports
+import "./calculator.scss"
+import { useState } from "react";
+
+const Calculator = () => {
+    const [unit, setUnit] = useState("mg/dl");
+    const [value, setValue] = useState(0);
+    const [result, setResult] = useState(null);
+
+    // Convert value
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+
+        if (value) {
+            let convertedValue = null;
+
+            // Convert from mg/dl to mmol/l
+            if (unit === "mg/dl") {
+                convertedValue = (parseFloat(value) / 38.67).toFixed(2);
+                
+            // Convert from mmol/l to mg/dl
+            } else if (unit === "mmol/l") {
+                convertedValue = (parseFloat(value) * 38.67).toFixed(2);
+            }
+
+            setResult(convertedValue);
+        }
+    };
+
+    return (
+        <div className="calculator">
+            <div className="title">
+                Converter
+            </div>
+            <div className="calculatorContainer">
+                <h3>Cholesterol</h3>
+
+                <form onSubmit={handleUpdate}>
+                    <div className="formInput" key="measuring-unit">
+                        <label>
+                            Measuring Unit
+                        </label>
+                        <select
+                            id="measuring-unit"
+                            onChange={(e) => setUnit(e.target.value)}
+                        >
+                            <option value="mg/dl">mg/dl</option>
+                            <option value="mmol/l">mmol/l</option>
+                        </select>
+                    </div>
+                    <div className="formInput" key="input2">
+                        <label>
+                            Value
+                        </label>
+                        <input id="value"
+                            type="number"
+                            min="0"
+                            max="1500"
+                            step="0.1"
+                            onChange={(e) => setValue(e.target.value)}
+                        />
+                    </div>
+                    <button type="submit">Converter</button>
+                </form>
+
+                {result !== null && (
+                    <div className="result">
+                        <h3>Converted Value:</h3>
+                        <p>{result} {unit === "mg/dl" ? "mmol/l" : "mg/dl"}</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}
+
+export default Calculator;

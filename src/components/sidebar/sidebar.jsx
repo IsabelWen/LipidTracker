@@ -14,6 +14,7 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 
 // Main
 const Sidebar = () => {
@@ -72,6 +73,13 @@ const Sidebar = () => {
                         <li>
                             <BiotechOutlinedIcon className="icon" />
                             <span>Test Results</span>
+                        </li>
+                    </Link>
+                    {/* Converter */}
+                    <Link to="/converter" style={{ textDecoration: "none" }}>
+                        <li>
+                            <CompareArrowsIcon className="icon" />
+                            <span>Converter</span>
                         </li>
                     </Link>
                     {/* FAQ */}

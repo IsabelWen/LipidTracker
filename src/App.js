@@ -3,6 +3,7 @@ import Home from "./pages/home/home";
 import Login from "./pages/login/login";
 import Newresults from "./pages/newresults/newresults";
 import Results from "./pages/results/results";
+import Converter from "./pages/converter/converter";
 import FAQ from "./pages/faq/faq";
 import Settings from "./pages/settings/settings";
 
@@ -33,6 +34,9 @@ function App() {
             <Route path="results">
               <Route index element={<RequireAuth><Results /></RequireAuth>} />
               <Route path="newresults" element={<RequireAuth><Newresults inputs={resultsInputs} title="Add New Test Result" /></RequireAuth>} />
+            </Route>
+            <Route path="converter">
+              <Route index element={<RequireAuth><Converter /></RequireAuth>} />
             </Route>
             <Route path="faq">
               <Route index element={<RequireAuth><FAQ /></RequireAuth>} />
