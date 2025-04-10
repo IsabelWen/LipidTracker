@@ -54,6 +54,14 @@
                 cursor: pointer;
                 margin: 10px 0;
             }
+
+            @media (max-width: 780px) {
+                flex-direction: column;
+
+                .formInput {
+                    width: 100%;
+                }
+            }
         }
 
         .result {

@@ -3,6 +3,7 @@ import "./calculator.scss"
 import { useState } from "react";
 
 const Calculator = () => {
+    const [lipid, setLipid] = useState("cholestrol");
     const [unit, setUnit] = useState("mg/dl");
     const [value, setValue] = useState(0);
     const [result, setResult] = useState(null);
@@ -13,14 +14,15 @@ const Calculator = () => {
 
         if (value) {
             let convertedValue = null;
-
+            let i = lipid === 'triglycerides' ? 88.57 : 38.67;
+            
             // Convert from mg/dl to mmol/l
             if (unit === "mg/dl") {
-                convertedValue = (parseFloat(value) / 38.67).toFixed(2);
-                
+                convertedValue = (parseFloat(value) / i).toFixed(2);
+                    
             // Convert from mmol/l to mg/dl
             } else if (unit === "mmol/l") {
-                convertedValue = (parseFloat(value) * 38.67).toFixed(2);
+                convertedValue = (parseFloat(value) * i).toFixed(2);
             }
 
             setResult(convertedValue);
@@ -33,9 +35,19 @@ const Calculator = () => {
                 Converter
             </div>
             <div className="calculatorContainer">
-                <h3>Cholesterol</h3>
-
                 <form onSubmit={handleUpdate}>
+                    <div className="formInput" key="lipid">
+                        <label>
+                            Blood Fat
+                        </label>
+                        <select
+                            id="lipid"
+                            onChange={(e) => setLipid(e.target.value)}
+                        >
+                            <option value="cholestrol">Cholestrol</option>
+                            <option value="triglycerides">Triglycerides</option>
+                        </select>
+                    </div>
                     <div className="formInput" key="measuring-unit">
                         <label>
                             Measuring Unit
