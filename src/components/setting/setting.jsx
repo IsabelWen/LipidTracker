@@ -142,8 +142,8 @@ const Setting = () => {
     };
 
     return (
-        <div className="setting">
-            <h1 className="title">Settings</h1><br/>
+        <div className="content">
+            <div className="title">Settings</div>
 
             <h3>Current Settings</h3><br/>
             <div className="personalinfo">

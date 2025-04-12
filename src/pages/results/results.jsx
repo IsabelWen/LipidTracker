@@ -1,5 +1,5 @@
 // Import scss
-import "./results.scss"
+import "../pages.scss"
 
 // Import components
 import Sidebar from "../../components/sidebar/sidebar";
@@ -8,9 +8,9 @@ import Resultstable from "../../components/resultstable/resultstable";
 // Main
 const Results = () => {
     return (
-        <div className="results">
+        <div className="page">
             <Sidebar className="sidebar" />
-            <div className="resultsContainer">
+            <div className="pageContainer">
                 <Resultstable />
             </div>
         </div>

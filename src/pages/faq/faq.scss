@@ -1,17 +1,21 @@
-.faq {
-    display: flex;
-    width: 100%;
+.accordionContainer {
+    margin-top: 40px;
+    padding-bottom: 25px;
 
-    @media (max-width: 600px) {
-        .sidebar {
-            width: 100%;
-            position: fixed; 
-            height: 100vh;
-            z-index: 3;
-        }
+    .accordionTitle {
+        font-weight: bold;
+        font-size: 18px;
     }
 
-    .faqContainer {
-        flex: 6;
+    hr {
+        height: 0;
+        border: 0.5px solid rgb(227, 230, 230, 0.4);
+        margin-bottom: 20px;
+        margin: 0 15px;
+    }
+
+    .accordionDetails {
+        line-height: 1.7;
+        max-width: 90%;
     }
 }

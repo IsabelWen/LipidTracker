@@ -1,5 +1,5 @@
 // Import scss
-import "./converter.scss"
+import "../pages.scss";
 
 // Import components
 import Sidebar from "../../components/sidebar/sidebar";
@@ -8,9 +8,9 @@ import Calculator from "../../components/calculator/calculator";
 // Main
 const Converter = () => {
     return (
-        <div className="converter">
+        <div className="page">
             <Sidebar className="sidebar" />
-            <div className="converterContainer">
+            <div className="pageContainer">
                 <Calculator />
             </div>
         </div>

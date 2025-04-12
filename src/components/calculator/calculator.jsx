@@ -30,7 +30,7 @@ const Calculator = () => {
     };
 
     return (
-        <div className="calculator">
+        <div className="content">
             <div className="title">
                 Converter
             </div>
@@ -72,7 +72,7 @@ const Calculator = () => {
                             onChange={(e) => setValue(e.target.value)}
                         />
                     </div>
-                    <button type="submit">Converter</button>
+                    <button type="submit">Convert</button>
                 </form>
 
                 {result !== null && (

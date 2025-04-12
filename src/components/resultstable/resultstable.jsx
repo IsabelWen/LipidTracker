@@ -128,7 +128,7 @@ const Resultstable = () => {
   ];
 
   return (
-    <div className="datatable">
+    <div className="content">
         <div className="title">
             Test Results
             <Link to="/results/newresults" className="link">

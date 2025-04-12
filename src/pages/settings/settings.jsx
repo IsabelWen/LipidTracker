@@ -1,5 +1,5 @@
 // Import scss
-import "./settings.scss"
+import "../pages.scss"
 
 // Import components
 import Sidebar from "../../components/sidebar/sidebar";
@@ -8,9 +8,9 @@ import Setting from "../../components/setting/setting";
 // Main
 const Settings = () => {
     return (
-        <div className="settings">
+        <div className="page">
             <Sidebar className="sidebar" />
-            <div className="settingsContainer">
+            <div className="pageContainer">
                 <Setting />
             </div>
         </div>
