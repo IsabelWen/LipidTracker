@@ -40,7 +40,7 @@ const HDLChart = () => {
         return () => {
             unsub();
         };
-    }, []);
+    }, [userUID]);
 
     // Extracting the highest HDL value from the data
     const highestHdl = Math.max(...data.map(item => item.hdl));
@@ -74,12 +74,12 @@ const HDLChart = () => {
                         barSize={65}
                         activeBar={<Rectangle fill="#689b5b" />}
                          />  
-                        <Bar dataKey="note"
+                        {/* <Bar dataKey="note"
                         name="Note"
                         fill="gray"
                         barSize={0}
                         legendType="none"
-                        />   
+                        />    */}
                 </BarChart>
             </ResponsiveContainer>
         </div>

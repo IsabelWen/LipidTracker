@@ -42,7 +42,7 @@ const Chart = () => {
         return () => {
             unsub();
         };
-    }, []);
+    }, [userUID]);
 
     // Extracting the highest values of all
     const highestCholesterol = showCholesterol ? Math.max(...data.map(item => item.cholesterol).filter(value => value !== undefined)) : 0;
@@ -141,12 +141,12 @@ const Chart = () => {
                                 activeDot={{ r: 8 }}
                             />
                         )}
-                        <Line
+                        {/* <Line
                         name="Note" 
                         dataKey="note"
                         stroke="gray"
                         legendType="none"
-                        />
+                        /> */}
                     </LineChart>
                 </ResponsiveContainer>
         </div>

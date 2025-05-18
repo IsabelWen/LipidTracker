@@ -109,6 +109,7 @@ const Update = ({ id, handleClose }) => {
                                 placeholder="Type in additional information, such as changes in medication or dietery."
                                 maxLength="1000"
                                 onChange={handleInput}
+                                value={data.note}
                                 ></textarea>
                             </div>
                             <button type="submit">Update</button>
